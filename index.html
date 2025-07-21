@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans" class=" ">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover"
+    />
+    <meta http-equiv="pragram" content="no-cache" />
+    <meta http-equiv="cache-control" content="no-cache，no-store,must-revalidate" />
+    <meta http-equiv="expires" content="0" />
+    <link rel="icon" href="https://pg.eeagd.edu.cn/ks/h5/ksy_logo.png" />
+    <title>高考报名</title>
+    <style>
+      #loading-mask {
+        position: fixed;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 100%;
+        background: #fff;
+        user-select: none;
+        z-index: 9999;
+        overflow: hidden;
+      }
+      .loading-wrapper {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -100%);
+      }
+      .loading-dot {
+        animation: antRotate 1.2s infinite linear;
+        transform: rotate(45deg);
+        position: relative;
+        display: inline-block;
+        font-size: 64px;
+        width: 64px;
+        height: 64px;
+        box-sizing: border-box;
+      }
+      .loading-dot i {
+        width: 22px;
+        height: 22px;
+        position: absolute;
+        display: block;
+        background-color: #1890ff;
+        border-radius: 100%;
+        transform: scale(0.75);
+        transform-origin: 50% 50%;
+        opacity: 0.3;
+        animation: antSpinMove 1s infinite linear alternate;
+      }
+      .loading-dot i:nth-child(1) {
+        top: 0;
+        left: 0;
+      }
+      .loading-dot i:nth-child(2) {
+        top: 0;
+        right: 0;
+        -webkit-animation-delay: 0.4s;
+        animation-delay: 0.4s;
+      }
+      .loading-dot i:nth-child(3) {
+        right: 0;
+        bottom: 0;
+        -webkit-animation-delay: 0.8s;
+        animation-delay: 0.8s;
+      }
+      .loading-dot i:nth-child(4) {
+        bottom: 0;
+        left: 0;
+        -webkit-animation-delay: 1.2s;
+        animation-delay: 1.2s;
+      }
+      @keyframes antRotate {
+        to {
+          -webkit-transform: rotate(405deg);
+          transform: rotate(405deg);
+        }
+      }
+      @-webkit-keyframes antRotate {
+        to {
+          -webkit-transform: rotate(405deg);
+          transform: rotate(405deg);
+        }
+      }
+      @keyframes antSpinMove {
+        to {
+          opacity: 1;
+        }
+      }
+      @-webkit-keyframes antSpinMove {
+        to {
+          opacity: 1;
+        }
+      }
+    </style>
+    <link rel="stylesheet" href="1_%E5%85%AC%E5%91%8A_files/ali_iconfont.css" />
+    <link rel="stylesheet" href="1_%E5%85%AC%E5%91%8A_files/ksy.css" />
+    <!-- <link href="https://pg.eeagd.edu.cn/ks/h5/static/css/chunk-0c37154c.724c2803.css" rel="prefetch" /> -->
+    <link href="1_%E5%85%AC%E5%91%8A_files/fail.79783e22.css" rel="prefetch" />
+    <link href="1_%E5%85%AC%E5%91%8A_files/vendor.47956426.css" rel="prefetch" />
+    <link href="1_%E5%85%AC%E5%91%8A_files/app.f5d34a6c.css" rel="preload" as="style" />
+    <link href="1_%E5%85%AC%E5%91%8A_files/app.f5d34a6c.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="1_%E5%85%AC%E5%91%8A_files/vendor.47956426.css" />
+    <link rel="stylesheet" type="text/css" href="1_%E5%85%AC%E5%91%8A_files/fail.79783e22.css" />
+  </head>
+  <body>
+    <noscript
+      ><strong
+        >We're sorry but vue-antd-pro doesn't work properly without JavaScript enabled. Please enable it to
+        continue.</strong
+      ></noscript
+    >
+    <div id="app">
+      <div data-v-23e60d05="" class="page-header-index-wide">
+        <header data-v-23e60d05="" class="header ant-layout-header">
+          <!----><img
+            data-v-23e60d05=""
+            src="data:image/png;base64,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"
+            alt=""
+            class="logo"
+          />
+          广东省普通高考/学考报名
+          <div data-v-23e60d05="" class="userInfo">
+            <!----><!----><!----><span data-v-23e60d05="" class="login">注册</span
+            ><span data-v-23e60d05="" class="login">登录</span>
+          </div>
+        </header>
+        <div data-v-23e60d05="" class="ant-card">
+          <div class="ant-card-body" style="padding: 0px">
+            <div data-v-23e60d05="" class="account-settings-info-main desktop">
+              <div data-v-23e60d05="" class="account-settings-info-left">
+                <ul
+                  data-v-23e60d05=""
+                  role="menu"
+                  class="ant-menu ant-menu-inline ant-menu-root ant-menu-dark"
+                  type="inner"
+                  style="border: 0px; width: auto"
+                >
+                  <li
+                    data-v-23e60d05=""
+                    role="menuitem"
+                    class="ant-menu-item ant-menu-item-selected"
+                    style="padding-left: 24px"
+                  >
+                    <a data-v-23e60d05="" href="#/xgk/ggxx" class="router-link-exact-active router-link-active"
+                      ><i data-v-23e60d05="" class="iconfont icongonggao"></i>公告
+                    </a>
+                  </li>
+                  <li data-v-23e60d05="" role="menuitem" class="ant-menu-item" style="padding-left: 24px">
+                    <a data-v-23e60d05="" href="#/xgk/login" class=""
+                      ><i data-v-23e60d05="" class="iconfont icongonggao"></i>登录
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <div data-v-23e60d05="" class="account-settings-info-right grag">
+                <div data-v-e67de562="" data-v-23e60d05="">
+                  <div data-v-e67de562="" class="ant-row" style="margin-left: -12px; margin-right: -12px">
+                    <div
+                      data-v-e67de562=""
+                      class="flex ant-col ant-col-xs-24 ant-col-sm-24 ant-col-md-24 ant-col-lg-24 ant-col-xl-8"
+                      style="padding-left: 12px; padding-right: 12px"
+                    >
+                      <!---->
+                      <div data-v-e67de562="" class="section mTop ant-card">
+                        <div class="ant-card-head">
+                          <div class="ant-card-head-wrapper">
+                            <div class="ant-card-head-title">资料下载</div>
+                            <div class="ant-card-extra">
+                              <a data-v-e67de562="" href="#/xgk/ggxx/morexw" class="">更多</a>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="ant-card-body" style="padding: 0px 20px">
+                          <div data-v-e67de562="" class="ant-list ant-list-split">
+                            <div class="ant-spin-nested-loading">
+                              <div class="ant-spin-container">
+                                <div class="ant-list-empty-text">
+                                  <div class="ant-empty ant-empty-normal">
+                                    <div class="ant-empty-image">
+                                      <svg
+                                        width="64"
+                                        height="41"
+                                        viewBox="0 0 64 41"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                      >
+                                        <g transform="translate(0 1)" fill="none" fillRule="evenodd">
+                                          <ellipse fill="#F5F5F5" cx="32" cy="33" rx="32" ry="7"></ellipse>
+                                          <g fillRule="nonzero" stroke="#D9D9D9">
+                                            <path
+                                              d="M55 12.76L44.854 1.258C44.367.474 43.656 0 42.907 0H21.093c-.749 0-1.46.474-1.947 1.257L9 12.761V22h46v-9.24z"
+                                            ></path>
+                                            <path
+                                              d="M41.613 15.931c0-1.605.994-2.93 2.227-2.931H55v18.137C55 33.26 53.68 35 52.05 35h-40.1C10.32 35 9 33.259 9 31.137V13h11.16c1.233 0 2.227 1.323 2.227 2.928v.022c0 1.605 1.005 2.901 2.237 2.901h14.752c1.232 0 2.237-1.308 2.237-2.913v-.007z"
+                                              fill="#FAFAFA"
+                                            ></path>
+                                          </g>
+                                        </g>
+                                      </svg>
+                                    </div>
+                                    <p class="ant-empty-description">暂无数据</p>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      data-v-e67de562=""
+                      class="zxgg-wrap ant-col ant-col-xs-24 ant-col-sm-24 ant-col-md-24 ant-col-lg-24 ant-col-xl-16"
+                      style="padding-left: 12px; padding-right: 12px"
+                    >
+                      <div data-v-e67de562="">
+                        <div data-v-e67de562="" class="project-list section zxgg mg ant-card">
+                          <div class="ant-card-head">
+                            <div class="ant-card-head-wrapper">
+                              <div class="ant-card-head-title">最新公告</div>
+                              <div class="ant-card-extra">
+                                <a data-v-e67de562="" href="#/xgk/ggxx/morexw" class="">更多</a>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="ant-card-body">
+                            <div data-v-e67de562="">
+                              <div data-v-e67de562="" class="project-card-grid ant-card-grid ant-card-grid-hoverable">
+                                <div data-v-e67de562="" class="ant-card">
+                                  <div class="ant-card-body" style="padding: 0px">
+                                    <div data-v-e67de562="" class="ant-card-meta">
+                                      <div class="ant-card-meta-detail">
+                                        <div class="ant-card-meta-title">
+                                          <div data-v-e67de562="" class="card-title">
+                                            <span data-v-e67de562="" class="pot f-pa f-pa-pot"></span
+                                            ><a data-v-e67de562="" href="#/xgk/ggxx/showxw" class=""
+                                              >关于做好2025年第二次广东省普通高中学业水平合格性考试报名工作的通知</a
+                                            >
+                                          </div>
+                                        </div>
+                                        <div class="ant-card-meta-description">
+                                          <div data-v-e67de562="">
+                                            <div data-v-e67de562="" class="card-description f-toe"></div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div data-v-e67de562="" class="project-item">
+                                      <span data-v-e67de562="" class="datetime">2025-04-03</span>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div data-v-e67de562="" class="project-card-grid ant-card-grid ant-card-grid-hoverable">
+                                <div data-v-e67de562="" class="ant-card">
+                                  <div class="ant-card-body" style="padding: 0px">
+                                    <div data-v-e67de562="" class="ant-card-meta">
+                                      <div class="ant-card-meta-detail">
+                                        <div class="ant-card-meta-title">
+                                          <div data-v-e67de562="" class="card-title">
+                                            <span data-v-e67de562="" class="pot f-pa f-pa-pot"></span
+                                            ><a data-v-e67de562="" href="#/xgk/ggxx/showxw" class=""
+                                              >2025年广东省普通高考报名百答百问（三）</a
+                                            >
+                                          </div>
+                                        </div>
+                                        <div class="ant-card-meta-description">
+                                          <div data-v-e67de562="">
+                                            <div data-v-e67de562="" class="card-description f-toe"></div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div data-v-e67de562="" class="project-item">
+                                      <span data-v-e67de562="" class="datetime">2024-10-30</span>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div data-v-e67de562="" class="project-card-grid ant-card-grid ant-card-grid-hoverable">
+                                <div data-v-e67de562="" class="ant-card">
+                                  <div class="ant-card-body" style="padding: 0px">
+                                    <div data-v-e67de562="" class="ant-card-meta">
+                                      <div class="ant-card-meta-detail">
+                                        <div class="ant-card-meta-title">
+                                          <div data-v-e67de562="" class="card-title">
+                                            <span data-v-e67de562="" class="pot f-pa f-pa-pot"></span
+                                            ><a data-v-e67de562="" href="#/xgk/ggxx/showxw" class=""
+                                              >2025年广东省普通高考报名百答百问（二）</a
+                                            >
+                                          </div>
+                                        </div>
+                                        <div class="ant-card-meta-description">
+                                          <div data-v-e67de562="">
+                                            <div data-v-e67de562="" class="card-description f-toe"></div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div data-v-e67de562="" class="project-item">
+                                      <span data-v-e67de562="" class="datetime">2024-10-30</span>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div data-v-e67de562="" class="section ant-card">
+                        <div class="ant-card-head">
+                          <div class="ant-card-head-wrapper">
+                            <div class="ant-card-head-title">招生政策</div>
+                            <div class="ant-card-extra">
+                              <a data-v-e67de562="" href="#/xgk/ggxx/morexw" class="">更多</a>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="ant-card-body" style="padding: 0px 20px">
+                          <div data-v-e67de562="" class="ant-list ant-list-split">
+                            <div class="ant-spin-nested-loading">
+                              <div class="ant-spin-container">
+                                <li data-v-e67de562="" class="ant-list-item">
+                                  <a
+                                    data-v-e67de562=""
+                                    href="#/xgk/ggxx/showxw"
+                                    class="f-toe"
+                                    style="color: rgb(102, 102, 102)"
+                                    ><span data-v-e67de562="" class="pot"></span
+                                    ><span
+                                      data-v-e67de562=""
+                                      title="关于做好2025年第二次广东省普通高中学业水平合格性考试报名工作的通知"
+                                      >关于做好2025年第二次广东省普通高中学业水平合格性考试报名...</span
+                                    ><span data-v-e67de562="" class="time">2025-04-03</span></a
+                                  >
+                                </li>
+                                <li data-v-e67de562="" class="ant-list-item">
+                                  <a
+                                    data-v-e67de562=""
+                                    href="#/xgk/ggxx/showxw"
+                                    class="f-toe"
+                                    style="color: rgb(102, 102, 102)"
+                                    ><span data-v-e67de562="" class="pot"></span
+                                    ><span data-v-e67de562="" title="2025年广东省普通高考报名百答百问（三）"
+                                      >2025年广东省普通高考报名百答百问（三）</span
+                                    ><span data-v-e67de562="" class="time">2024-10-30</span></a
+                                  >
+                                </li>
+                                <li data-v-e67de562="" class="ant-list-item">
+                                  <a
+                                    data-v-e67de562=""
+                                    href="#/xgk/ggxx/showxw"
+                                    class="f-toe"
+                                    style="color: rgb(102, 102, 102)"
+                                    ><span data-v-e67de562="" class="pot"></span
+                                    ><span data-v-e67de562="" title="2025年广东省普通高考报名百答百问（二）"
+                                      >2025年广东省普通高考报名百答百问（二）</span
+                                    ><span data-v-e67de562="" class="time">2024-10-30</span></a
+                                  >
+                                </li>
+                                <li data-v-e67de562="" class="ant-list-item">
+                                  <a
+                                    data-v-e67de562=""
+                                    href="#/xgk/ggxx/showxw"
+                                    class="f-toe"
+                                    style="color: rgb(102, 102, 102)"
+                                    ><span data-v-e67de562="" class="pot"></span
+                                    ><span data-v-e67de562="" title="2025年广东省普通高考报名百答百问（一）"
+                                      >2025年广东省普通高考报名百答百问（一）</span
+                                    ><span data-v-e67de562="" class="time">2024-10-30</span></a
+                                  >
+                                </li>
+                                <li data-v-e67de562="" class="ant-list-item">
+                                  <a
+                                    data-v-e67de562=""
+                                    href="#/xgk/ggxx/showxw"
+                                    class="f-toe"
+                                    style="color: rgb(102, 102, 102)"
+                                    ><span data-v-e67de562="" class="pot"></span
+                                    ><span
+                                      data-v-e67de562=""
+                                      title="关于做好广东省2025年普通高校招收中等职业学校毕业生统一考试招生工作的通知"
+                                      >关于做好广东省2025年普通高校招收中等职业学校毕业生统一考...</span
+                                    ><span data-v-e67de562="" class="time">2024-10-30</span></a
+                                  >
+                                </li>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!---->
+                    </div>
+                  </div>
+                  <div data-v-e67de562=""></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!----><!---->
+      </div>
+    </div>
+    <div id="footer" class="footer">
+      <div class="footerCon clearfix">
+        <span id="_span_jiucuo"
+          ><img
+            onclick="Link('4400000081')"
+            style="margin: 0; border: 0; cursor: pointer"
+            src="1_%E5%85%AC%E5%91%8A_files/ksy_jiucuo.png"
+          /> </span
+        ><span id="_ideConac"
+          ><a href="https://bszs.conac.cn/sitename?method=show&amp;id=0922834C0DCF1D41E053012819AC4180"
+            ><img src="1_%E5%85%AC%E5%91%8A_files/blue.png" /></a
+        ></span>
+        <div class="right">
+          <ul style="margin-top: 10px">
+            <li><a href="https://www.gdzwfw.gov.cn/" target="_blank">政务服务</a> |</li>
+            <li><a href="https://eea.gd.gov.cn/sitemap/content/post_2533113.html" target="_blank">网站导航</a></li>
+          </ul>
+          <p>主办单位：广东省教育考试院</p>
+          <p>版权所有：广东省教育考试院</p>
+          <p>
+            <a href="https://beian.miit.gov.cn/">粤ICP备05008847号</a>&nbsp;&nbsp;&nbsp;&nbsp;<a
+              href="https://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44010602003663"
+              ><img src="1_%E5%85%AC%E5%91%8A_files/ksy_ga.png" /> 粤公网安备44010602003663号</a
+            >&nbsp;&nbsp;&nbsp;&nbsp;网站标识码：4400000081
+          </p>
+          <p>联系电话：020-62833628</p>
+        </div>
+      </div>
+    </div>
+    <!---->
+    <script>
+      window._CONFIG = {};
+      // window._CONFIG['domianURL'] = 'http://localhost:8080/xxzs_ddk'
+      var localObj = window.location;
+      var contextPath = localObj.pathname.split("/")[1];
+      var domainUrl = contextPath;
+      if (domainUrl !== "") {
+        domainUrl = "/" + domainUrl;
+        window._CONFIG["uploadURL"] = domainUrl + "/upload.jsmeb";
+        window._CONFIG["downloadUrl"] = domainUrl + "/download.do";
+        window._CONFIG["pubDownloadUrl"] = domainUrl + "/public/download.do";
+      } else {
+        window._CONFIG["uploadURL"] = domainUrl + "/api/upload.jsmeb";
+        window._CONFIG["downloadUrl"] = domainUrl + "/api/download.do";
+        window._CONFIG["pubDownloadUrl"] = domainUrl + "/api/public/download.do";
+      }
+      window._CONFIG["domainUrl"] = domainUrl;
+      window._CONFIG["regUrl"] = domainUrl + "/reg";
+      // window._CONFIG['rcodeUrl'] = '/ks/login/login.addcode'
+      window._CONFIG["sysTitle"] = "广东省普通高考/学考报名";
+      window._CONFIG["sysTitleGk"] = "广东省普通高考报名";
+      window._CONFIG["sysTitleXk"] = "广东省学业水平考试报名";
+      window._CONFIG["sysTitleGz"] = "广东省高职自主招生报名";
+
+      // 跳转纠错连接
+      function Link(site_code) {
+        var url = "";
+        if (parent !== window) {
+          try {
+            url = window.top.location.href;
+          } catch (e) {
+            url = window.top.document.referrer;
+          }
+        }
+        if (url.length == 0) url = document.location.href;
+        //跳转至纠错系统填写页面
+      }
+    </script>
+    <script>
+      window.addEventListener("hashchange", function () {
+        const hash = window.location.hash || "#/xgk/ggxx";
+
+        if (hash == "#/xgk/ggxx") {
+          window.location.href = "./index.html";
+        } else if (hash == "#/xgk/login") {
+          window.location.href = "./1_登录.html";
+        }
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,2995 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans" class=" ">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover"
+    />
+    <meta http-equiv="pragram" content="no-cache" />
+    <meta http-equiv="cache-control" content="no-cache，no-store,must-revalidate" />
+    <meta http-equiv="expires" content="0" />
+    <link rel="icon" href="https://pg.eeagd.edu.cn/ks/h5/ksy_logo.png" />
+    <title>高考报名</title>
+    <style>
+      #loading-mask {
+        position: fixed;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 100%;
+        background: #fff;
+        user-select: none;
+        z-index: 9999;
+        overflow: hidden;
+      }
+      .loading-wrapper {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -100%);
+      }
+      .loading-dot {
+        animation: antRotate 1.2s infinite linear;
+        transform: rotate(45deg);
+        position: relative;
+        display: inline-block;
+        font-size: 64px;
+        width: 64px;
+        height: 64px;
+        box-sizing: border-box;
+      }
+      .loading-dot i {
+        width: 22px;
+        height: 22px;
+        position: absolute;
+        display: block;
+        background-color: #1890ff;
+        border-radius: 100%;
+        transform: scale(0.75);
+        transform-origin: 50% 50%;
+        opacity: 0.3;
+        animation: antSpinMove 1s infinite linear alternate;
+      }
+      .loading-dot i:nth-child(1) {
+        top: 0;
+        left: 0;
+      }
+      .loading-dot i:nth-child(2) {
+        top: 0;
+        right: 0;
+        -webkit-animation-delay: 0.4s;
+        animation-delay: 0.4s;
+      }
+      .loading-dot i:nth-child(3) {
+        right: 0;
+        bottom: 0;
+        -webkit-animation-delay: 0.8s;
+        animation-delay: 0.8s;
+      }
+      .loading-dot i:nth-child(4) {
+        bottom: 0;
+        left: 0;
+        -webkit-animation-delay: 1.2s;
+        animation-delay: 1.2s;
+      }
+      @keyframes antRotate {
+        to {
+          -webkit-transform: rotate(405deg);
+          transform: rotate(405deg);
+        }
+      }
+      @-webkit-keyframes antRotate {
+        to {
+          -webkit-transform: rotate(405deg);
+          transform: rotate(405deg);
+        }
+      }
+      @keyframes antSpinMove {
+        to {
+          opacity: 1;
+        }
+      }
+      @-webkit-keyframes antSpinMove {
+        to {
+          opacity: 1;
+        }
+      }
+    </style>
+    <link rel="stylesheet" href="4_%E6%9F%A5%E7%9C%8B%E5%BF%97%E6%84%BF_files/ali_iconfont.css" />
+    <link rel="stylesheet" href="4_%E6%9F%A5%E7%9C%8B%E5%BF%97%E6%84%BF_files/ksy.css" />
+    <link href="https://pg.eeagd.edu.cn/ks/h5/static/css/chunk-0c37154c.724c2803.css" rel="prefetch" />
+    <link href="4_%E6%9F%A5%E7%9C%8B%E5%BF%97%E6%84%BF_files/fail.79783e22.css" rel="prefetch" />
+    <link href="4_%E6%9F%A5%E7%9C%8B%E5%BF%97%E6%84%BF_files/vendor.47956426.css" rel="prefetch" />
+    <link href="4_%E6%9F%A5%E7%9C%8B%E5%BF%97%E6%84%BF_files/app.f5d34a6c.css" rel="preload" as="style" />
+    <link href="4_%E6%9F%A5%E7%9C%8B%E5%BF%97%E6%84%BF_files/app.f5d34a6c.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="4_%E6%9F%A5%E7%9C%8B%E5%BF%97%E6%84%BF_files/vendor.47956426.css" />
+    <link rel="stylesheet" type="text/css" href="4_%E6%9F%A5%E7%9C%8B%E5%BF%97%E6%84%BF_files/fail.79783e22.css" />
+  </head>
+  <body>
+    <noscript
+      ><strong
+        >We're sorry but vue-antd-pro doesn't work properly without JavaScript enabled. Please enable it to
+        continue.</strong
+      ></noscript
+    >
+    <div id="app">
+      <div data-v-23e60d05="" class="page-header-index-wide">
+        <header data-v-23e60d05="" class="header ant-layout-header">
+          <!----><img
+            data-v-23e60d05=""
+            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAFqElEQVRoQ72ae4hUdRTHP99ZH/Qyiqh8C1LorGESBVEUa4GGYVDhM4LQUiorq92V7J9AzZ1FrSjEXn/5pH9CDcuo7F1EJbk7GmmYWYllWZnlrjsnznpXd+/embn3zuj5Z4e95/X9Pc7rXlEFMrNhwFSgDrgCuBj4F/ge+BR4DfhAUqEK5nqoUCUKzewyYDFwB5Apo+tHYAnwYjWBpAZgZg8COeCshIvwCTBNkgOqmBIDMDOXeRaYV4H1X4CbJeUr0NEpmgaAH5knKjUM7AeuleR/U1MiAGZ2C/BGGuBFPPwIuLGSOxEbgJn1AXYAo1IvV7TgbEmvpNWZBMA9wKtpDZWQ+wEYKakjje4kALb5dqcxEkOmTpLrT0yxAJjZhcBBoCaxhXgCyyQ9Ho+1J1dcALcCm9IYiCnzlaSrYvL2YIsL4GHgmTQGYsocknRRTN5UABYAT6cxEFPmuKS+MXlTAagPyoY0NuLIHJZ0QRzGME/cIzQbeCmNgZgyH0u6PiZvqh24DvCsebpolqRUOSbuDpwDHAL6nwYE7wATzkQi2wxMqjKAt4Apkv5KqzfWDrhyM5sIbElrKCT3B/AU8Jwkq0RnEgDO+xlwTQUG/wzyyQpJ/rtiig0g2IUrgc+Bfgkt/w48742QJP9dNUoEIABxr/e1MT04HnRviyQdjimTiC0xgABEI7C0jKX/gDsleQMUSUtbbJgyTM0YdSZGCAZjyMR+GXsL4v12WP9kVl5yR1IqAAGIu4EXgHMjNHttf7ukjVFWF+22of3aWCIx3ax0hSvRYca6QoGFC8ZoX1hfKgBmNha436cLwIAIJx+VtCLK+aV5m1QDay1aruimyvjbMsxpGK113ZkSATCzEUBzMAcqJrsVmBgVHptb7SEyLC+36iWOixk81pA9tTixAZiZr7jPgTwrFyM/96Ok3me2udWmINZb8UnI5na4r08Gby5XIiZHGZGnJJjekNUGf14WgJl5+fAycFeM8OBh8pEwX9N3NiTTRt7EecV0WIbBjaP0sz/PtdilZPDZUfTFNY50GLV+J0oCMDO/oK8DN8Vw3ueew6PmPLmdthpjZikdDVn18CWX94UuQWJtw2jNLArAzDxZeekwPobzzrJV0oQwr4fKTIY9gI9lilJSAB6djhkjSwFYA8yI6byzzZPk2bYHNeWtXifuTklKCsCVGSyIBGBm84Hl5YyGno+V9E1YJtdqWxBeCFYdAPB2LwBm5vP9LxLW/p64zpbUFvayudX2mRja9X8Zm9rEnIVZFb2kUUibdtmgcHQS/NQDgJn5jN8rzqvLrVjo+X5JJ53s/qw5b0et2wi+HQYldb5LX0R0agsDmBWEzIT+0yppTJRQNQEs3mGX9K3hQDc7pwAE8X43MCSp90CLJD96vSh8hDA2YsxpGKPujpQ12bn6YlX3BNfjCJnZXGBlWU3RDAckDSwC4E0TvcJrmDdNFDp5iYO3Li1ANiUAv8QDJB0Ny5+RMGpmPpP5MKXzXWI3SOqlY1HehvcXe8oVcCl2oNChIJGZmSegByoE0CgpMmHldtoarHRSTAFgQ0NW0zqjkJn5e6rBFQLYLmlclA4vJ2pEqymy+TkhUmBg18WOUcz9c0zUeqcmM/Nz31qh813i4yRtj9KVy9tUwbqi5XQQnTplQ9Gmuz4vp73Eqc9qfSermSVp0svh3CjptmJMubz5mN5LlHIvxSNVuPMFUd84Wsu6GByA97XerFSLxkt6r5iypl02OdPB6lK9QZSsjCMFmNtYKy8yT5IDeDf4xqFaAPb68EvSr8UUBtOIJsGUGLvhfcZrbdAYNZ1wAJ59R1bL+0DPl0Ff/FspvZ29Qg0zMOoEtcFHIi5y0Oi89Nv61bBh/uXyj0aij5WZ+cDp/CoDcHXfAjMlOZjTRr4D7eW6pQqse4b2l9irgK8rHeRG+fE//8obWAWCWb0AAAAASUVORK5CYII="
+            alt=""
+            class="logo"
+          />
+          广东省普通高考报名
+          <div data-v-23e60d05="" class="userInfo">
+            <img
+              data-v-23e60d05=""
+              src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAHlElEQVR4XtWbf2zU9RnHX8+3a8VCgRbnHD9kVCzFwkbW9ZAfMzPZFuOWNDPgNhYDGBOzPzbdj+ofeMdxxWRjbMxlf8xkEQ2BZdMZWeZCNqNGQeAKG84WSpU2iDKGSKEik5bes3y+d9cfV673/d59vu31k9w/d5/n1/s+P57n+TyPEPDYcERnlX7CsoTDQoVagRqFm4BpAhVGvMJHwEWBMwodAu1OgmN9k9j/+BJ5P0gVJQjm4QNaTwlrRLkbqC1QRrsKf6OfXc23y+ECeY0gtwbAz/dqxaUyHhRYD9xmW9EUv6MK26f08uSjK8WsmoJHwQBEX9HpiXIeAn6IUFWwRl4YKOeB3ziXeSJ6p1zwQpJtTv4AqEq4hbUCvwBuKESJAmjPKTQ1N/AMIpoPn7wAiB7W+Yl+ngZW5CM0AJp9pQ5rw1+SE355+wYgclBXI/wemOpXWMDze1AeiC2VZ/3I8Q6AqkRa3OX+Ez8CxmHuL2MNNHndEp4A2NiqZYnLbBdYMw4G+RapsMspZ/2mRdKbizgnACnjdwvclYtZMf2usMcppzEXCKMDoCqPxdnhCN8rJuO86pJQdm4Ocd9o22FUACIt+jOUR70KLMZ5KmxpbpCsNmQFIHpAVyUcfJ2oxQiAq5Nyb7bb4ZoARFu0ul/5p8C0ojXKh2IKF0uEL0YbpDOTbCQA5rqL8xrCSh8yPE0tEairhNpKmDUZKsqg34SCvXDmMhzrhqPdye+sD2VvLMQdmefBCADCcV0nsN22Asbwr82ByutG59x9Bf5xCtq6bWsACbh/c0iG2TYMADewmUwH8Glb4h2Br8+GZSYD4GPsPwN/fw8SdlfDB87H1AwNoIYBEDmoGxGiPvTMOfWuOf6NTzM1IOw5lVOEvwlKNLZUNqWJBgDY+IpO0XJO2gxpF1XB6lv86Zc5+9kT0GqCX1tDOT+5j8+l8wkDAITj+tNUaGtFlDnwfvT55EFXyPioD7a9afdgdEPokGw1eiUBSMb2xwVuLUTZobRLZsC3qu1we6EL/nXODq+kvbwTC1FjbgQXgGhclydgn0URfHd+8rqzMdq74Q/v2OA0yMOBFdGQvOECEI7rNoGHbYr48RdgWoHLP63PxV741Zs2tXN5PRELycMuAJG4HrOQvR2mYbgePuXYUdo4RrFDdngN4XI8FpJaiR7Q2QkH25cNG+qhrLgBoB9uNgAEEvQ8tBiqJtn51wLaAuZB5tsSadHNKBvsqDrIpdgPQVdT4XEJx/XPAvfYBqCor8GUsQrPGwAOCdTbBsCqI/Rv6E/Y1tB9kzxsAHhfYKZ99rC4ClYV6Ao/dwLesukKDzFUlZMGgJ70K20QIBRdMDTUSOVDicTVbsCZgaIJh+++GRpu9AfvobPw4rvWw+FhSij0Bg5AWqKJDL8621tC5KX3LEeAWbB3AQh6CwyVbQ5Gcy4srISbygcjxaEpMbPfA0mJXQsEswWCPAT9Lfqxn50+BAO5BsfeHP8S09dgII6Qf3XGnsJ1hIJyhcfenDwkplzhewX+mAe5J5ISB+ZMTn5uLE/eAlPL4LqSwWixNwFX+qGnF0xa/OxlOPVx8hOEB5hW3A2GNsR1Tgm868kaj5OM0Ysr4bYqqJ4KpXmGxX0J6OyBo+ehtRuuWnaHrzjMTSdE2oEFHu3LOm1qKSz/LCy5Aa4vKZTbcPr/9cORc/DGf6CnzwrvjlhIFqQB+DW4lV55DZP5uXMm3P4Ze1mgbIqYVXDwv/Dy6YJXxGBKLNyiK0TZm4/11RXQOA+m53jyyof3aDQXrsDuLujMs1pQhZXNDbJvIC0eidOBMN+roobwKzPhjplg/P3xGObZ7LXT8OppN7T1PjLT4obSz8OIcWnvqQbj3xfDMC9Hz3d6d6FHPowAbqlrKSdFGDWbb4z/znyomV4Mpg/q8PaF5NtBrjhCle4pfcwd8TRmWHl5HF1VDYtnFJfxaW3e+hCeG1ECkaGrsim2VAYegH09j5uY/ptzi9P4tFZ/PQktZ7Pq+IFzldrochnIMY04vh6L63oHnspkMWMSfL8uf6dmrGAzztPv2uDcJyMl5iyQcEmSFaGvZ9YBr62B6glSMdR5EZ4xZR7Dx75YA1/OWSJjaJoP6S29CQ6ni6TmVcC6QtsexmoJpOQ83Q5dKR/BFEmVOdRfq5g66w2eKor+k+G35lZYUGSnfi48Oy7AzrdTs/yWyaWZR1p0y/UlND2yZPycnVyGZvvdOElbj8Clq2xtDklTtnk5S2Vf6GJH47yJWSr7ly52Ns4roFTWoNbaqmV1dexmghVLA3va2mhclKNi3JMXr6qm1MHU102IcnlgF7BexEK5fHrvqLrlNBOiYQJoEo89RJ5WwNADRFVXQ5G2zMADIkG1zAxBQVVN2FxUTVPAWpExaJrK2BLrgC3j2TYHPGL+DK9LPvM69L0FMhmoqnGRTIXZD2CMGidxGyd/C2wTGa/GycwoU9U0Qj8I3A8szNeByUFnqtlMoPakSJG0zl5LYVU1FSf3Ad8A72m2LMabEskXgR0iRdw8ne2fU9VZwDKgLpV6ryHZPm8yT+WASXJfAkyHgPmYOO440AbsFwm2ff7/GSqOJkCiACoAAAAASUVORK5CYII="
+              alt=""
+              class="user"
+            /><span data-v-23e60d05="">刘雅婷</span><span data-v-23e60d05="" class="quit">退出</span
+            ><!----><!---->
+          </div>
+        </header>
+        <div data-v-23e60d05="" class="ant-card">
+          <div class="ant-card-body" style="padding: 0px">
+            <div data-v-23e60d05="" class="account-settings-info-main desktop">
+              <div data-v-23e60d05="" class="account-settings-info-left">
+                <ul
+                  data-v-23e60d05=""
+                  role="menu"
+                  class="ant-menu ant-menu-inline ant-menu-root ant-menu-dark"
+                  type="inner"
+                  style="border: 0px; width: auto"
+                >
+                  <li data-v-23e60d05="" role="menuitem" class="ant-menu-item" style="padding-left: 24px">
+                    <a data-v-23e60d05="" href="#/xgk/ggxx" class=""
+                      ><i data-v-23e60d05="" class="iconfont icongonggao"></i>公告
+                    </a>
+                  </li>
+                  <li data-v-23e60d05="" role="menuitem" class="ant-menu-item" style="padding-left: 24px">
+                    <a data-v-23e60d05="" href="#/xgk/ksInfo" class=""
+                      ><i data-v-23e60d05="" class="iconfont icongonggao"></i>考生信息
+                    </a>
+                  </li>
+                  <li data-v-23e60d05="" role="menuitem" class="ant-menu-submenu ant-menu-submenu-inline">
+                    <div aria-haspopup="true" class="ant-menu-submenu-title" style="padding-left: 24px">
+                      <span data-v-23e60d05="" class="submenu-title-wrapper"
+                        ><i data-v-23e60d05="" class="iconfont iconbaoming"></i>资格申请 </span
+                      ><i class="ant-menu-submenu-arrow"></i>
+                    </div>
+                    <div></div>
+                  </li>
+                  <li data-v-23e60d05="" role="menuitem" class="ant-menu-submenu ant-menu-submenu-inline">
+                    <div aria-haspopup="true" class="ant-menu-submenu-title" style="padding-left: 24px">
+                      <span data-v-23e60d05="" class="submenu-title-wrapper"
+                        ><i data-v-23e60d05="" class="iconfont iconbaoming"></i>预报名 </span
+                      ><i class="ant-menu-submenu-arrow"></i>
+                    </div>
+                    <div></div>
+                  </li>
+                  <li
+                    data-v-23e60d05=""
+                    role="menuitem"
+                    class="ant-menu-submenu ant-menu-submenu-inline ant-menu-submenu-open"
+                  >
+                    <div
+                      aria-expanded="true"
+                      aria-owns="/xgk/zy3$Menu"
+                      aria-haspopup="true"
+                      class="ant-menu-submenu-title"
+                      style="padding-left: 24px"
+                    >
+                      <span data-v-23e60d05="" class="submenu-title-wrapper"
+                        ><i data-v-23e60d05="" class="iconfont iconbaoming"></i>志愿 </span
+                      ><i class="ant-menu-submenu-arrow"></i>
+                    </div>
+                    <ul role="menu" class="ant-menu ant-menu-inline ant-menu-sub">
+                      <li data-v-23e60d05="" role="menuitem" class="ant-menu-item" style="padding-left: 48px">
+                        <a data-v-23e60d05="" href="#/xgk/kszy/ZsjhMl/11?index=11" class=""
+                          ><i data-v-23e60d05="" class="iconfont iconyouer"></i>普高计划查询
+                        </a>
+                      </li>
+                      <li data-v-23e60d05="" role="menuitem" class="ant-menu-item" style="padding-left: 48px">
+                        <a data-v-23e60d05="" href="#/xgk/kszy/ZsjhMl/12?index=12" class=""
+                          ><i data-v-23e60d05="" class="iconfont iconyouer"></i>普高征集查询
+                        </a>
+                      </li>
+                      <li
+                        data-v-23e60d05=""
+                        role="menuitem"
+                        class="ant-menu-item ant-menu-item-selected"
+                        style="padding-left: 48px"
+                      >
+                        <a data-v-23e60d05="" href="#/xgk/kszy/kszyInfo?index=11" class=""
+                          ><i data-v-23e60d05="" class="iconfont iconyouer"></i>普高志愿填报
+                        </a>
+                      </li>
+                      <li data-v-23e60d05="" role="menuitem" class="ant-menu-item" style="padding-left: 48px">
+                        <a data-v-23e60d05="" href="#/xgk/kszy/kszyInfo?index=12" class=""
+                          ><i data-v-23e60d05="" class="iconfont iconyouer"></i>普高征集填报
+                        </a>
+                      </li>
+                    </ul>
+                  </li>
+                  <li data-v-23e60d05="" role="menuitem" class="ant-menu-submenu ant-menu-submenu-inline">
+                    <div aria-haspopup="true" class="ant-menu-submenu-title" style="padding-left: 24px">
+                      <span data-v-23e60d05="" class="submenu-title-wrapper"
+                        ><i data-v-23e60d05="" class="iconfont iconbaoming"></i>考务信息 </span
+                      ><i class="ant-menu-submenu-arrow"></i>
+                    </div>
+                    <div></div>
+                  </li>
+                  <li data-v-23e60d05="" role="menuitem" class="ant-menu-submenu ant-menu-submenu-inline">
+                    <div aria-haspopup="true" class="ant-menu-submenu-title" style="padding-left: 24px">
+                      <span data-v-23e60d05="" class="submenu-title-wrapper"
+                        ><i data-v-23e60d05="" class="iconfont iconbaoming"></i>学考成绩 </span
+                      ><i class="ant-menu-submenu-arrow"></i>
+                    </div>
+                    <div></div>
+                  </li>
+                </ul>
+              </div>
+              <div data-v-23e60d05="" class="account-settings-info-right white">
+                <div data-v-15e06433="" data-v-23e60d05="" class="kszy-view">
+                  <!----><!---->
+                  <div data-v-15e06433="" style="text-align: center; font-size: larger; font-weight: bold; margin: 5px">
+                    查看志愿
+                  </div>
+                  <!---->
+                  <div data-v-21835dbc="" data-v-15e06433="">
+                    <div data-v-21835dbc="">
+                      <button
+                        data-v-21835dbc=""
+                        type="button"
+                        class="ant-btn ant-btn-primary ant-btn-background-ghost"
+                        style="margin: 5px"
+                      >
+                        <span>查询专业目录</span></button
+                      ><button
+                        data-v-21835dbc=""
+                        type="button"
+                        class="ant-btn ant-btn-primary ant-btn-background-ghost"
+                        style="margin: 5px"
+                      >
+                        <span>信息核对页面</span></button
+                      ><button
+                        data-v-21835dbc=""
+                        type="button"
+                        class="ant-btn ant-btn-primary ant-btn-background-ghost"
+                        style="margin: 5px"
+                      >
+                        <span>查询所报志愿</span>
+                      </button>
+                    </div>
+                  </div>
+                  <div data-v-15e06433="" id="printKsinfo">
+                    <div data-v-73c0b208="" data-v-15e06433="">
+                      <table
+                        data-v-73c0b208=""
+                        style="width: 90%; margin-top: 15px; margin-bottom: 5px; font-weight: bolder"
+                      >
+                        <tr data-v-73c0b208="">
+                          <td data-v-73c0b208="" style="width: 80px">志愿进度：</td>
+                          <td data-v-73c0b208="">
+                            <div data-v-73c0b208="" class="custom-step-hx">
+                              <div
+                                data-v-73c0b208=""
+                                class="steps ant-steps ant-steps-horizontal ant-steps-small ant-steps-label-horizontal"
+                                responsive="false"
+                              >
+                                <div data-v-73c0b208="" class="step ant-steps-item ant-steps-item-finish">
+                                  <div class="ant-steps-item-container">
+                                    <div class="ant-steps-item-tail"></div>
+                                    <div class="ant-steps-item-icon">
+                                      <span class="ant-steps-icon"
+                                        ><i aria-label="图标: check" class="anticon anticon-check ant-steps-finish-icon"
+                                          ><svg
+                                            viewBox="64 64 896 896"
+                                            data-icon="check"
+                                            width="1em"
+                                            height="1em"
+                                            fill="currentColor"
+                                            aria-hidden="true"
+                                            focusable="false"
+                                            class=""
+                                          >
+                                            <path
+                                              d="M912 190h-69.9c-9.8 0-19.1 4.5-25.1 12.2L404.7 724.5 207 474a32 32 0 0 0-25.1-12.2H112c-6.7 0-10.4 7.7-6.3 12.9l273.9 347c12.8 16.2 37.4 16.2 50.3 0l488.4-618.9c4.1-5.1.4-12.8-6.3-12.8z"
+                                            ></path></svg></i
+                                      ></span>
+                                    </div>
+                                    <div class="ant-steps-item-content">
+                                      <div class="ant-steps-item-title">未填报</div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div data-v-73c0b208="" class="step ant-steps-item ant-steps-item-finish">
+                                  <div class="ant-steps-item-container">
+                                    <div class="ant-steps-item-tail"></div>
+                                    <div class="ant-steps-item-icon">
+                                      <span class="ant-steps-icon"
+                                        ><i aria-label="图标: check" class="anticon anticon-check ant-steps-finish-icon"
+                                          ><svg
+                                            viewBox="64 64 896 896"
+                                            data-icon="check"
+                                            width="1em"
+                                            height="1em"
+                                            fill="currentColor"
+                                            aria-hidden="true"
+                                            focusable="false"
+                                            class=""
+                                          >
+                                            <path
+                                              d="M912 190h-69.9c-9.8 0-19.1 4.5-25.1 12.2L404.7 724.5 207 474a32 32 0 0 0-25.1-12.2H112c-6.7 0-10.4 7.7-6.3 12.9l273.9 347c12.8 16.2 37.4 16.2 50.3 0l488.4-618.9c4.1-5.1.4-12.8-6.3-12.8z"
+                                            ></path></svg></i
+                                      ></span>
+                                    </div>
+                                    <div class="ant-steps-item-content">
+                                      <div class="ant-steps-item-title">已填报未确认</div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div
+                                  data-v-73c0b208=""
+                                  class="step ant-steps-item ant-steps-item-process ant-steps-item-active"
+                                >
+                                  <div class="ant-steps-item-container">
+                                    <div class="ant-steps-item-tail"></div>
+                                    <div class="ant-steps-item-icon"><span class="ant-steps-icon">3</span></div>
+                                    <div class="ant-steps-item-content">
+                                      <div class="ant-steps-item-title">已确认（已完成）</div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </td>
+                        </tr>
+                      </table>
+                      <div data-v-73c0b208="" class="ant-descriptions ant-descriptions-small ant-descriptions-bordered">
+                        <div class="ant-descriptions-view">
+                          <table>
+                            <tbody>
+                              <tr class="ant-descriptions-row">
+                                <th class="ant-descriptions-item-label ant-descriptions-item-colon">考生号</th>
+                                <td colspan="1" class="ant-descriptions-item-content">2000192638</td>
+                                <th class="ant-descriptions-item-label ant-descriptions-item-colon">姓名</th>
+                                <td colspan="1" class="ant-descriptions-item-content">刘雅婷</td>
+                                <th class="ant-descriptions-item-label ant-descriptions-item-colon">志愿状态</th>
+                                <td colspan="3" class="ant-descriptions-item-content">
+                                  <span data-v-73c0b208="">已确认</span>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                      <div data-v-73c0b208="" class="ant-descriptions ant-descriptions-small ant-descriptions-bordered">
+                        <div class="ant-descriptions-title">
+                          <div data-v-73c0b208="">
+                            <div data-v-73c0b208="">
+                              <span data-v-73c0b208="" class="des-title">考生信息</span
+                              ><i
+                                data-v-73c0b208=""
+                                aria-label="图标: up"
+                                class="anticon anticon-up"
+                                style="color: rgb(53, 131, 255)"
+                                ><svg
+                                  viewBox="64 64 896 896"
+                                  data-icon="up"
+                                  width="1em"
+                                  height="1em"
+                                  fill="currentColor"
+                                  aria-hidden="true"
+                                  focusable="false"
+                                  class=""
+                                >
+                                  <path
+                                    d="M890.5 755.3L537.9 269.2c-12.8-17.6-39-17.6-51.7 0L133.5 755.3A8 8 0 0 0 140 768h75c5.1 0 9.9-2.5 12.9-6.6L512 369.8l284.1 391.6c3 4.1 7.8 6.6 12.9 6.6h75c6.5 0 10.3-7.4 6.5-12.7z"
+                                  ></path></svg
+                              ></i>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="ant-descriptions-view">
+                          <table>
+                            <tbody>
+                              <tr class="ant-descriptions-row">
+                                <th class="ant-descriptions-item-label ant-descriptions-item-colon">性别</th>
+                                <td colspan="1" class="ant-descriptions-item-content">女</td>
+                                <th class="ant-descriptions-item-label ant-descriptions-item-colon">身份证号</th>
+                                <td colspan="1" class="ant-descriptions-item-content">430423200608230262</td>
+                                <th class="ant-descriptions-item-label ant-descriptions-item-colon">考生属性</th>
+                                <td colspan="1" class="ant-descriptions-item-content">普通类(物理)</td>
+                              </tr>
+                              <tr class="ant-descriptions-row">
+                                <th class="ant-descriptions-item-label ant-descriptions-item-colon">考生科目</th>
+                                <td colspan="3" class="ant-descriptions-item-content">
+                                  物理，生物学，地理，语文，数学，外语(英语)，英语听说
+                                </td>
+                                <th class="ant-descriptions-item-label ant-descriptions-item-colon">专业类别</th>
+                                <td colspan="1" class="ant-descriptions-item-content">普通类(物理)</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div data-v-15e06433="" style="text-align: center">
+                    <button
+                      data-v-15e06433=""
+                      type="button"
+                      class="col ant-btn ant-btn-primary ant-btn-background-ghost"
+                      style="margin: 5px; display: none"
+                    >
+                      <span>确认志愿</span></button
+                    ><button
+                      id="backButton1"
+                      data-v-15e06433=""
+                      type="button"
+                      class="ant-btn ant-btn-primary ant-btn-background-ghost"
+                      style="margin: 5px"
+                    >
+                      <span>返 回</span></button
+                    ><button
+                      data-v-15e06433=""
+                      type="button"
+                      class="ant-btn ant-btn-primary ant-btn-background-ghost"
+                      style="margin: 5px"
+                    >
+                      <span>打 印</span>
+                    </button>
+                  </div>
+                  <div
+                    data-v-15e06433=""
+                    id="print"
+                    class="zy-table ant-descriptions ant-descriptions-small ant-descriptions-bordered"
+                  >
+                    <div data-v-41c586cf="" data-v-15e06433="" class="kszy-table-view">
+                      <div
+                        data-v-41c586cf=""
+                        class="zy-table ant-descriptions ant-descriptions-small ant-descriptions-bordered"
+                      >
+                        <div data-v-41c586cf="" class="ant-descriptions-view">
+                          <table data-v-41c586cf="">
+                            <tbody data-v-41c586cf="">
+                              <tr data-v-41c586cf="" class="ant-descriptions-row">
+                                <th
+                                  data-v-41c586cf=""
+                                  colspan="4"
+                                  class="ant-descriptions-item-label ant-descriptions-item-colon txt-align fw"
+                                >
+                                  <span data-v-41c586cf="">专科</span> <span data-v-41c586cf="">. 普通类</span>
+                                </th>
+                              </tr>
+                              <!---->
+                              <tr data-v-41c586cf="" class="ant-descriptions-row">
+                                <th
+                                  data-v-41c586cf=""
+                                  class="ant-descriptions-item-label ant-descriptions-item-colon txt-align"
+                                >
+                                  院校专业组
+                                </th>
+                                <th
+                                  data-v-41c586cf=""
+                                  colspan="1"
+                                  class="ant-descriptions-item-label ant-descriptions-item-colon txt-align"
+                                >
+                                  专业
+                                </th>
+                                <th
+                                  data-v-41c586cf=""
+                                  class="ant-descriptions-item-label ant-descriptions-item-colon txt-align"
+                                  style="width: 40px"
+                                >
+                                  服从
+                                </th>
+                              </tr>
+                              <tr data-v-41c586cf="" class="ant-descriptions-row">
+                                <td data-v-41c586cf="" class="ant-descriptions-item-content">
+                                  <div data-v-41c586cf="" class="yx-outer">
+                                    <div data-v-41c586cf="" class="order-box">1</div>
+                                    <div data-v-41c586cf="" class="iblock">12040广州民航职业技术学院-511专业组</div>
+                                    <br data-v-41c586cf="" /><!---->
+                                    <div data-v-41c586cf="" class="iblock red-color"></div>
+                                  </div>
+                                </td>
+                                <td data-v-41c586cf="" colspan="1" class="custom-td ant-descriptions-item-content">
+                                  <ul data-v-41c586cf="" class="view-ul">
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业1] 009 : 民航运输服务</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业2] 016 : 机场场务技术与管理</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业3] 011 : 航空物流管理</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业4] 017 : 通用航空航务技术</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业5] 022 : 民航通信技术</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业6] 023 : 民航通信技术</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                  </ul>
+                                </td>
+                                <td
+                                  data-v-41c586cf=""
+                                  class="ant-descriptions-item-content txt-align"
+                                  style="width: 40px"
+                                >
+                                  是
+                                </td>
+                              </tr>
+                              <tr data-v-41c586cf="" class="ant-descriptions-row">
+                                <td data-v-41c586cf="" class="ant-descriptions-item-content">
+                                  <div data-v-41c586cf="" class="yx-outer">
+                                    <div data-v-41c586cf="" class="order-box">2</div>
+                                    <div data-v-41c586cf="" class="iblock">13941湖南高速铁路职业技术学院-508专业组</div>
+                                    <br data-v-41c586cf="" /><!---->
+                                    <div data-v-41c586cf="" class="iblock red-color"></div>
+                                  </div>
+                                </td>
+                                <td data-v-41c586cf="" colspan="1" class="custom-td ant-descriptions-item-content">
+                                  <ul data-v-41c586cf="" class="view-ul">
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业1] 034 : 高速铁路客运服务</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业2] 033 : 铁道交通运营管理</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业3] 036 : 城市轨道交通通信信号技术</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业4] 037 : 城市轨道交通运营管理</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业5] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业6] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                  </ul>
+                                </td>
+                                <td
+                                  data-v-41c586cf=""
+                                  class="ant-descriptions-item-content txt-align"
+                                  style="width: 40px"
+                                >
+                                  是
+                                </td>
+                              </tr>
+                              <tr data-v-41c586cf="" class="ant-descriptions-row">
+                                <td data-v-41c586cf="" class="ant-descriptions-item-content">
+                                  <div data-v-41c586cf="" class="yx-outer">
+                                    <div data-v-41c586cf="" class="order-box">3</div>
+                                    <div data-v-41c586cf="" class="iblock">12040广州民航职业技术学院-510专业组</div>
+                                    <br data-v-41c586cf="" /><!---->
+                                    <div data-v-41c586cf="" class="iblock red-color"></div>
+                                  </div>
+                                </td>
+                                <td data-v-41c586cf="" colspan="1" class="custom-td ant-descriptions-item-content">
+                                  <ul data-v-41c586cf="" class="view-ul">
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业1] 013 : 民航安全技术管理</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业2] 014 : 民航安全技术管理</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业3] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业4] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业5] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业6] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                  </ul>
+                                </td>
+                                <td
+                                  data-v-41c586cf=""
+                                  class="ant-descriptions-item-content txt-align"
+                                  style="width: 40px"
+                                >
+                                  是
+                                </td>
+                              </tr>
+                              <tr data-v-41c586cf="" class="ant-descriptions-row">
+                                <td data-v-41c586cf="" class="ant-descriptions-item-content">
+                                  <div data-v-41c586cf="" class="yx-outer">
+                                    <div data-v-41c586cf="" class="order-box">4</div>
+                                    <div data-v-41c586cf="" class="iblock">13943广州铁路职业技术学院-503专业组</div>
+                                    <br data-v-41c586cf="" /><!---->
+                                    <div data-v-41c586cf="" class="iblock red-color"></div>
+                                  </div>
+                                </td>
+                                <td data-v-41c586cf="" colspan="1" class="custom-td ant-descriptions-item-content">
+                                  <ul data-v-41c586cf="" class="view-ul">
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业1] 213 : 铁路物流管理</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业2] 211 : 现代物流管理</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业3] 212 : 城市轨道交通运营管理</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业4] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业5] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业6] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                  </ul>
+                                </td>
+                                <td
+                                  data-v-41c586cf=""
+                                  class="ant-descriptions-item-content txt-align"
+                                  style="width: 40px"
+                                >
+                                  是
+                                </td>
+                              </tr>
+                              <tr data-v-41c586cf="" class="ant-descriptions-row">
+                                <td data-v-41c586cf="" class="ant-descriptions-item-content">
+                                  <div data-v-41c586cf="" class="yx-outer">
+                                    <div data-v-41c586cf="" class="order-box">5</div>
+                                    <div data-v-41c586cf="" class="iblock">
+                                      10831顺德职业技术大学（原顺德职业技术学院）-504专业组
+                                    </div>
+                                    <br data-v-41c586cf="" /><!---->
+                                    <div data-v-41c586cf="" class="iblock red-color"></div>
+                                  </div>
+                                </td>
+                                <td data-v-41c586cf="" colspan="1" class="custom-td ant-descriptions-item-content">
+                                  <ul data-v-41c586cf="" class="view-ul">
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业1] 217 : 康复治疗技术</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业2] 216 : 护理</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业3] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业4] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业5] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业6] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                  </ul>
+                                </td>
+                                <td
+                                  data-v-41c586cf=""
+                                  class="ant-descriptions-item-content txt-align"
+                                  style="width: 40px"
+                                >
+                                  是
+                                </td>
+                              </tr>
+                              <tr data-v-41c586cf="" class="ant-descriptions-row">
+                                <td data-v-41c586cf="" class="ant-descriptions-item-content">
+                                  <div data-v-41c586cf="" class="yx-outer">
+                                    <div data-v-41c586cf="" class="order-box">6</div>
+                                    <div data-v-41c586cf="" class="iblock">12302湖南铁道职业技术学院-515专业组</div>
+                                    <br data-v-41c586cf="" /><!---->
+                                    <div data-v-41c586cf="" class="iblock red-color"></div>
+                                  </div>
+                                </td>
+                                <td data-v-41c586cf="" colspan="1" class="custom-td ant-descriptions-item-content">
+                                  <ul data-v-41c586cf="" class="view-ul">
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业1] 023 : 铁路物流管理</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业2] 019 : 城市轨道车辆应用技术</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业3] 015 : 城市轨道交通通信信号技术</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业4] 022 : 铁道交通运营管理</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业5] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业6] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                  </ul>
+                                </td>
+                                <td
+                                  data-v-41c586cf=""
+                                  class="ant-descriptions-item-content txt-align"
+                                  style="width: 40px"
+                                >
+                                  是
+                                </td>
+                              </tr>
+                              <tr data-v-41c586cf="" class="ant-descriptions-row">
+                                <td data-v-41c586cf="" class="ant-descriptions-item-content">
+                                  <div data-v-41c586cf="" class="yx-outer">
+                                    <div data-v-41c586cf="" class="order-box">7</div>
+                                    <div data-v-41c586cf="" class="iblock">14592广州卫生职业技术学院-503专业组</div>
+                                    <br data-v-41c586cf="" /><!---->
+                                    <div data-v-41c586cf="" class="iblock red-color"></div>
+                                  </div>
+                                </td>
+                                <td data-v-41c586cf="" colspan="1" class="custom-td ant-descriptions-item-content">
+                                  <ul data-v-41c586cf="" class="view-ul">
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业1] 042 : 口腔医学</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业2] 044 : 康复治疗技术</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业3] 043 : 口腔医学技术</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业4] 036 : 眼视光技术</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业5] 025 : 护理</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业6] 041 : 健康管理</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                  </ul>
+                                </td>
+                                <td
+                                  data-v-41c586cf=""
+                                  class="ant-descriptions-item-content txt-align"
+                                  style="width: 40px"
+                                >
+                                  是
+                                </td>
+                              </tr>
+                              <tr data-v-41c586cf="" class="ant-descriptions-row">
+                                <td data-v-41c586cf="" class="ant-descriptions-item-content">
+                                  <div data-v-41c586cf="" class="yx-outer">
+                                    <div data-v-41c586cf="" class="order-box">8</div>
+                                    <div data-v-41c586cf="" class="iblock">12573广东食品药品职业学院-502专业组</div>
+                                    <br data-v-41c586cf="" /><!---->
+                                    <div data-v-41c586cf="" class="iblock red-color"></div>
+                                  </div>
+                                </td>
+                                <td data-v-41c586cf="" colspan="1" class="custom-td ant-descriptions-item-content">
+                                  <ul data-v-41c586cf="" class="view-ul">
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业1] 085 : 医学美容技术</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业2] 082 : 康复治疗技术</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业3] 090 : 护理</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业4] 114 : 婴幼儿托育服务与管理</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业5] 091 : 助产</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业6] 081 : 化妆品质量与安全</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                  </ul>
+                                </td>
+                                <td
+                                  data-v-41c586cf=""
+                                  class="ant-descriptions-item-content txt-align"
+                                  style="width: 40px"
+                                >
+                                  是
+                                </td>
+                              </tr>
+                              <tr data-v-41c586cf="" class="ant-descriptions-row">
+                                <td data-v-41c586cf="" class="ant-descriptions-item-content">
+                                  <div data-v-41c586cf="" class="yx-outer">
+                                    <div data-v-41c586cf="" class="order-box">9</div>
+                                    <div data-v-41c586cf="" class="iblock">12739湖南环境生物职业技术学院-504专业组</div>
+                                    <br data-v-41c586cf="" /><!---->
+                                    <div data-v-41c586cf="" class="iblock red-color"></div>
+                                  </div>
+                                </td>
+                                <td data-v-41c586cf="" colspan="1" class="custom-td ant-descriptions-item-content">
+                                  <ul data-v-41c586cf="" class="view-ul">
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业1] 013 : 护理</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业2] 015 : 康复治疗技术</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业3] 018 : 宠物养护与驯导</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业4] 016 : 动物药学</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业5] 017 : 宠物医疗技术</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业6] 019 : 畜牧兽医</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                  </ul>
+                                </td>
+                                <td
+                                  data-v-41c586cf=""
+                                  class="ant-descriptions-item-content txt-align"
+                                  style="width: 40px"
+                                >
+                                  是
+                                </td>
+                              </tr>
+                              <tr data-v-41c586cf="" class="ant-descriptions-row">
+                                <td data-v-41c586cf="" class="ant-descriptions-item-content">
+                                  <div data-v-41c586cf="" class="yx-outer">
+                                    <div data-v-41c586cf="" class="order-box">10</div>
+                                    <div data-v-41c586cf="" class="iblock">14263东莞职业技术学院-514专业组</div>
+                                    <br data-v-41c586cf="" /><!---->
+                                    <div data-v-41c586cf="" class="iblock red-color"></div>
+                                  </div>
+                                </td>
+                                <td data-v-41c586cf="" colspan="1" class="custom-td ant-descriptions-item-content">
+                                  <ul data-v-41c586cf="" class="view-ul">
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业1] 171 : 包装策划与设计</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业2] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业3] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业4] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业5] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业6] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                  </ul>
+                                </td>
+                                <td
+                                  data-v-41c586cf=""
+                                  class="ant-descriptions-item-content txt-align"
+                                  style="width: 40px"
+                                >
+                                  是
+                                </td>
+                              </tr>
+                              <tr data-v-41c586cf="" class="ant-descriptions-row">
+                                <td data-v-41c586cf="" class="ant-descriptions-item-content">
+                                  <div data-v-41c586cf="" class="yx-outer">
+                                    <div data-v-41c586cf="" class="order-box">11</div>
+                                    <div data-v-41c586cf="" class="iblock">12572广东科学技术职业学院-511专业组</div>
+                                    <br data-v-41c586cf="" /><!---->
+                                    <div data-v-41c586cf="" class="iblock red-color"></div>
+                                  </div>
+                                </td>
+                                <td data-v-41c586cf="" colspan="1" class="custom-td ant-descriptions-item-content">
+                                  <ul data-v-41c586cf="" class="view-ul">
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业1] 211 : 空中乘务</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业2] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业3] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业4] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业5] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业6] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                  </ul>
+                                </td>
+                                <td
+                                  data-v-41c586cf=""
+                                  class="ant-descriptions-item-content txt-align"
+                                  style="width: 40px"
+                                >
+                                  是
+                                </td>
+                              </tr>
+                              <tr data-v-41c586cf="" class="ant-descriptions-row">
+                                <td data-v-41c586cf="" class="ant-descriptions-item-content">
+                                  <div data-v-41c586cf="" class="yx-outer">
+                                    <div data-v-41c586cf="" class="order-box">12</div>
+                                    <div data-v-41c586cf="" class="iblock">14759广东潮州卫生健康职业学院-502专业组</div>
+                                    <br data-v-41c586cf="" /><!---->
+                                    <div data-v-41c586cf="" class="iblock red-color"></div>
+                                  </div>
+                                </td>
+                                <td data-v-41c586cf="" colspan="1" class="custom-td ant-descriptions-item-content">
+                                  <ul data-v-41c586cf="" class="view-ul">
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业1] 011 : 康复治疗技术</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业2] 010 : 助产</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业3] 009 : 护理</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业4] 021 : 婴幼儿托育服务与管理</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业5] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业6] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                  </ul>
+                                </td>
+                                <td
+                                  data-v-41c586cf=""
+                                  class="ant-descriptions-item-content txt-align"
+                                  style="width: 40px"
+                                >
+                                  是
+                                </td>
+                              </tr>
+                              <tr data-v-41c586cf="" class="ant-descriptions-row" style="display: none">
+                                <td data-v-41c586cf="" class="ant-descriptions-item-content">
+                                  <div data-v-41c586cf="" class="yx-outer">
+                                    <div data-v-41c586cf="" class="order-box">13</div>
+                                    <div data-v-41c586cf="" class="iblock">未填</div>
+                                    <br data-v-41c586cf="" /><!---->
+                                    <div data-v-41c586cf="" class="iblock red-color"></div>
+                                  </div>
+                                </td>
+                                <td data-v-41c586cf="" colspan="1" class="custom-td ant-descriptions-item-content">
+                                  <ul data-v-41c586cf="" class="view-ul">
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业1] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业2] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业3] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业4] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业5] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业6] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                  </ul>
+                                </td>
+                                <td
+                                  data-v-41c586cf=""
+                                  class="ant-descriptions-item-content txt-align"
+                                  style="width: 40px"
+                                >
+                                  是
+                                </td>
+                              </tr>
+                              <tr data-v-41c586cf="" class="ant-descriptions-row" style="display: none">
+                                <td data-v-41c586cf="" class="ant-descriptions-item-content">
+                                  <div data-v-41c586cf="" class="yx-outer">
+                                    <div data-v-41c586cf="" class="order-box">14</div>
+                                    <div data-v-41c586cf="" class="iblock">未填</div>
+                                    <br data-v-41c586cf="" /><!---->
+                                    <div data-v-41c586cf="" class="iblock red-color"></div>
+                                  </div>
+                                </td>
+                                <td data-v-41c586cf="" colspan="1" class="custom-td ant-descriptions-item-content">
+                                  <ul data-v-41c586cf="" class="view-ul">
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业1] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业2] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业3] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业4] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业5] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业6] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                  </ul>
+                                </td>
+                                <td
+                                  data-v-41c586cf=""
+                                  class="ant-descriptions-item-content txt-align"
+                                  style="width: 40px"
+                                >
+                                  是
+                                </td>
+                              </tr>
+                              <tr data-v-41c586cf="" class="ant-descriptions-row" style="display: none">
+                                <td data-v-41c586cf="" class="ant-descriptions-item-content">
+                                  <div data-v-41c586cf="" class="yx-outer">
+                                    <div data-v-41c586cf="" class="order-box">15</div>
+                                    <div data-v-41c586cf="" class="iblock">未填</div>
+                                    <br data-v-41c586cf="" /><!---->
+                                    <div data-v-41c586cf="" class="iblock red-color"></div>
+                                  </div>
+                                </td>
+                                <td data-v-41c586cf="" colspan="1" class="custom-td ant-descriptions-item-content">
+                                  <ul data-v-41c586cf="" class="view-ul">
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业1] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业2] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业3] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业4] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业5] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业6] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                  </ul>
+                                </td>
+                                <td
+                                  data-v-41c586cf=""
+                                  class="ant-descriptions-item-content txt-align"
+                                  style="width: 40px"
+                                >
+                                  是
+                                </td>
+                              </tr>
+                              <tr data-v-41c586cf="" class="ant-descriptions-row" style="display: none">
+                                <td data-v-41c586cf="" class="ant-descriptions-item-content">
+                                  <div data-v-41c586cf="" class="yx-outer">
+                                    <div data-v-41c586cf="" class="order-box">16</div>
+                                    <div data-v-41c586cf="" class="iblock">未填</div>
+                                    <br data-v-41c586cf="" /><!---->
+                                    <div data-v-41c586cf="" class="iblock red-color"></div>
+                                  </div>
+                                </td>
+                                <td data-v-41c586cf="" colspan="1" class="custom-td ant-descriptions-item-content">
+                                  <ul data-v-41c586cf="" class="view-ul">
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业1] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业2] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业3] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业4] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业5] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业6] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                  </ul>
+                                </td>
+                                <td
+                                  data-v-41c586cf=""
+                                  class="ant-descriptions-item-content txt-align"
+                                  style="width: 40px"
+                                >
+                                  是
+                                </td>
+                              </tr>
+                              <tr data-v-41c586cf="" class="ant-descriptions-row" style="display: none">
+                                <td data-v-41c586cf="" class="ant-descriptions-item-content">
+                                  <div data-v-41c586cf="" class="yx-outer">
+                                    <div data-v-41c586cf="" class="order-box">17</div>
+                                    <div data-v-41c586cf="" class="iblock">未填</div>
+                                    <br data-v-41c586cf="" /><!---->
+                                    <div data-v-41c586cf="" class="iblock red-color"></div>
+                                  </div>
+                                </td>
+                                <td data-v-41c586cf="" colspan="1" class="custom-td ant-descriptions-item-content">
+                                  <ul data-v-41c586cf="" class="view-ul">
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业1] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业2] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业3] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业4] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业5] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业6] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                  </ul>
+                                </td>
+                                <td
+                                  data-v-41c586cf=""
+                                  class="ant-descriptions-item-content txt-align"
+                                  style="width: 40px"
+                                >
+                                  是
+                                </td>
+                              </tr>
+                              <tr data-v-41c586cf="" class="ant-descriptions-row" style="display: none">
+                                <td data-v-41c586cf="" class="ant-descriptions-item-content">
+                                  <div data-v-41c586cf="" class="yx-outer">
+                                    <div data-v-41c586cf="" class="order-box">18</div>
+                                    <div data-v-41c586cf="" class="iblock">未填</div>
+                                    <br data-v-41c586cf="" /><!---->
+                                    <div data-v-41c586cf="" class="iblock red-color"></div>
+                                  </div>
+                                </td>
+                                <td data-v-41c586cf="" colspan="1" class="custom-td ant-descriptions-item-content">
+                                  <ul data-v-41c586cf="" class="view-ul">
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业1] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业2] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业3] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业4] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业5] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业6] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                  </ul>
+                                </td>
+                                <td
+                                  data-v-41c586cf=""
+                                  class="ant-descriptions-item-content txt-align"
+                                  style="width: 40px"
+                                >
+                                  是
+                                </td>
+                              </tr>
+                              <tr data-v-41c586cf="" class="ant-descriptions-row" style="display: none">
+                                <td data-v-41c586cf="" class="ant-descriptions-item-content">
+                                  <div data-v-41c586cf="" class="yx-outer">
+                                    <div data-v-41c586cf="" class="order-box">19</div>
+                                    <div data-v-41c586cf="" class="iblock">未填</div>
+                                    <br data-v-41c586cf="" /><!---->
+                                    <div data-v-41c586cf="" class="iblock red-color"></div>
+                                  </div>
+                                </td>
+                                <td data-v-41c586cf="" colspan="1" class="custom-td ant-descriptions-item-content">
+                                  <ul data-v-41c586cf="" class="view-ul">
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业1] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业2] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业3] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业4] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业5] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业6] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                  </ul>
+                                </td>
+                                <td
+                                  data-v-41c586cf=""
+                                  class="ant-descriptions-item-content txt-align"
+                                  style="width: 40px"
+                                >
+                                  是
+                                </td>
+                              </tr>
+                              <tr data-v-41c586cf="" class="ant-descriptions-row" style="display: none">
+                                <td data-v-41c586cf="" class="ant-descriptions-item-content">
+                                  <div data-v-41c586cf="" class="yx-outer">
+                                    <div data-v-41c586cf="" class="order-box">20</div>
+                                    <div data-v-41c586cf="" class="iblock">未填</div>
+                                    <br data-v-41c586cf="" /><!---->
+                                    <div data-v-41c586cf="" class="iblock red-color"></div>
+                                  </div>
+                                </td>
+                                <td data-v-41c586cf="" colspan="1" class="custom-td ant-descriptions-item-content">
+                                  <ul data-v-41c586cf="" class="view-ul">
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业1] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业2] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业3] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业4] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业5] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业6] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                  </ul>
+                                </td>
+                                <td
+                                  data-v-41c586cf=""
+                                  class="ant-descriptions-item-content txt-align"
+                                  style="width: 40px"
+                                >
+                                  是
+                                </td>
+                              </tr>
+                              <tr data-v-41c586cf="" class="ant-descriptions-row" style="display: none">
+                                <td data-v-41c586cf="" class="ant-descriptions-item-content">
+                                  <div data-v-41c586cf="" class="yx-outer">
+                                    <div data-v-41c586cf="" class="order-box">21</div>
+                                    <div data-v-41c586cf="" class="iblock">未填</div>
+                                    <br data-v-41c586cf="" /><!---->
+                                    <div data-v-41c586cf="" class="iblock red-color"></div>
+                                  </div>
+                                </td>
+                                <td data-v-41c586cf="" colspan="1" class="custom-td ant-descriptions-item-content">
+                                  <ul data-v-41c586cf="" class="view-ul">
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业1] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业2] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业3] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业4] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业5] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业6] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                  </ul>
+                                </td>
+                                <td
+                                  data-v-41c586cf=""
+                                  class="ant-descriptions-item-content txt-align"
+                                  style="width: 40px"
+                                >
+                                  是
+                                </td>
+                              </tr>
+                              <tr data-v-41c586cf="" class="ant-descriptions-row" style="display: none">
+                                <td data-v-41c586cf="" class="ant-descriptions-item-content">
+                                  <div data-v-41c586cf="" class="yx-outer">
+                                    <div data-v-41c586cf="" class="order-box">22</div>
+                                    <div data-v-41c586cf="" class="iblock">未填</div>
+                                    <br data-v-41c586cf="" /><!---->
+                                    <div data-v-41c586cf="" class="iblock red-color"></div>
+                                  </div>
+                                </td>
+                                <td data-v-41c586cf="" colspan="1" class="custom-td ant-descriptions-item-content">
+                                  <ul data-v-41c586cf="" class="view-ul">
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业1] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业2] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业3] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业4] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业5] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业6] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                  </ul>
+                                </td>
+                                <td
+                                  data-v-41c586cf=""
+                                  class="ant-descriptions-item-content txt-align"
+                                  style="width: 40px"
+                                >
+                                  是
+                                </td>
+                              </tr>
+                              <tr data-v-41c586cf="" class="ant-descriptions-row" style="display: none">
+                                <td data-v-41c586cf="" class="ant-descriptions-item-content">
+                                  <div data-v-41c586cf="" class="yx-outer">
+                                    <div data-v-41c586cf="" class="order-box">23</div>
+                                    <div data-v-41c586cf="" class="iblock">未填</div>
+                                    <br data-v-41c586cf="" /><!---->
+                                    <div data-v-41c586cf="" class="iblock red-color"></div>
+                                  </div>
+                                </td>
+                                <td data-v-41c586cf="" colspan="1" class="custom-td ant-descriptions-item-content">
+                                  <ul data-v-41c586cf="" class="view-ul">
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业1] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业2] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业3] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业4] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业5] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业6] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                  </ul>
+                                </td>
+                                <td
+                                  data-v-41c586cf=""
+                                  class="ant-descriptions-item-content txt-align"
+                                  style="width: 40px"
+                                >
+                                  是
+                                </td>
+                              </tr>
+                              <tr data-v-41c586cf="" class="ant-descriptions-row" style="display: none">
+                                <td data-v-41c586cf="" class="ant-descriptions-item-content">
+                                  <div data-v-41c586cf="" class="yx-outer">
+                                    <div data-v-41c586cf="" class="order-box">24</div>
+                                    <div data-v-41c586cf="" class="iblock">未填</div>
+                                    <br data-v-41c586cf="" /><!---->
+                                    <div data-v-41c586cf="" class="iblock red-color"></div>
+                                  </div>
+                                </td>
+                                <td data-v-41c586cf="" colspan="1" class="custom-td ant-descriptions-item-content">
+                                  <ul data-v-41c586cf="" class="view-ul">
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业1] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业2] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业3] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业4] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业5] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业6] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                  </ul>
+                                </td>
+                                <td
+                                  data-v-41c586cf=""
+                                  class="ant-descriptions-item-content txt-align"
+                                  style="width: 40px"
+                                >
+                                  是
+                                </td>
+                              </tr>
+                              <tr data-v-41c586cf="" class="ant-descriptions-row" style="display: none">
+                                <td data-v-41c586cf="" class="ant-descriptions-item-content">
+                                  <div data-v-41c586cf="" class="yx-outer">
+                                    <div data-v-41c586cf="" class="order-box">25</div>
+                                    <div data-v-41c586cf="" class="iblock">未填</div>
+                                    <br data-v-41c586cf="" /><!---->
+                                    <div data-v-41c586cf="" class="iblock red-color"></div>
+                                  </div>
+                                </td>
+                                <td data-v-41c586cf="" colspan="1" class="custom-td ant-descriptions-item-content">
+                                  <ul data-v-41c586cf="" class="view-ul">
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业1] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业2] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业3] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业4] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业5] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业6] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                  </ul>
+                                </td>
+                                <td
+                                  data-v-41c586cf=""
+                                  class="ant-descriptions-item-content txt-align"
+                                  style="width: 40px"
+                                >
+                                  是
+                                </td>
+                              </tr>
+                              <tr data-v-41c586cf="" class="ant-descriptions-row" style="display: none">
+                                <td data-v-41c586cf="" class="ant-descriptions-item-content">
+                                  <div data-v-41c586cf="" class="yx-outer">
+                                    <div data-v-41c586cf="" class="order-box">26</div>
+                                    <div data-v-41c586cf="" class="iblock">未填</div>
+                                    <br data-v-41c586cf="" /><!---->
+                                    <div data-v-41c586cf="" class="iblock red-color"></div>
+                                  </div>
+                                </td>
+                                <td data-v-41c586cf="" colspan="1" class="custom-td ant-descriptions-item-content">
+                                  <ul data-v-41c586cf="" class="view-ul">
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业1] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业2] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业3] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业4] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业5] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业6] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                  </ul>
+                                </td>
+                                <td
+                                  data-v-41c586cf=""
+                                  class="ant-descriptions-item-content txt-align"
+                                  style="width: 40px"
+                                >
+                                  是
+                                </td>
+                              </tr>
+                              <tr data-v-41c586cf="" class="ant-descriptions-row" style="display: none">
+                                <td data-v-41c586cf="" class="ant-descriptions-item-content">
+                                  <div data-v-41c586cf="" class="yx-outer">
+                                    <div data-v-41c586cf="" class="order-box">27</div>
+                                    <div data-v-41c586cf="" class="iblock">未填</div>
+                                    <br data-v-41c586cf="" /><!---->
+                                    <div data-v-41c586cf="" class="iblock red-color"></div>
+                                  </div>
+                                </td>
+                                <td data-v-41c586cf="" colspan="1" class="custom-td ant-descriptions-item-content">
+                                  <ul data-v-41c586cf="" class="view-ul">
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业1] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业2] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业3] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业4] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业5] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业6] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                  </ul>
+                                </td>
+                                <td
+                                  data-v-41c586cf=""
+                                  class="ant-descriptions-item-content txt-align"
+                                  style="width: 40px"
+                                >
+                                  是
+                                </td>
+                              </tr>
+                              <tr data-v-41c586cf="" class="ant-descriptions-row" style="display: none">
+                                <td data-v-41c586cf="" class="ant-descriptions-item-content">
+                                  <div data-v-41c586cf="" class="yx-outer">
+                                    <div data-v-41c586cf="" class="order-box">28</div>
+                                    <div data-v-41c586cf="" class="iblock">未填</div>
+                                    <br data-v-41c586cf="" /><!---->
+                                    <div data-v-41c586cf="" class="iblock red-color"></div>
+                                  </div>
+                                </td>
+                                <td data-v-41c586cf="" colspan="1" class="custom-td ant-descriptions-item-content">
+                                  <ul data-v-41c586cf="" class="view-ul">
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业1] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业2] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业3] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业4] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业5] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业6] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                  </ul>
+                                </td>
+                                <td
+                                  data-v-41c586cf=""
+                                  class="ant-descriptions-item-content txt-align"
+                                  style="width: 40px"
+                                >
+                                  是
+                                </td>
+                              </tr>
+                              <tr data-v-41c586cf="" class="ant-descriptions-row" style="display: none">
+                                <td data-v-41c586cf="" class="ant-descriptions-item-content">
+                                  <div data-v-41c586cf="" class="yx-outer">
+                                    <div data-v-41c586cf="" class="order-box">29</div>
+                                    <div data-v-41c586cf="" class="iblock">未填</div>
+                                    <br data-v-41c586cf="" /><!---->
+                                    <div data-v-41c586cf="" class="iblock red-color"></div>
+                                  </div>
+                                </td>
+                                <td data-v-41c586cf="" colspan="1" class="custom-td ant-descriptions-item-content">
+                                  <ul data-v-41c586cf="" class="view-ul">
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业1] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业2] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业3] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业4] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业5] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业6] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                  </ul>
+                                </td>
+                                <td
+                                  data-v-41c586cf=""
+                                  class="ant-descriptions-item-content txt-align"
+                                  style="width: 40px"
+                                >
+                                  是
+                                </td>
+                              </tr>
+                              <tr data-v-41c586cf="" class="ant-descriptions-row" style="display: none">
+                                <td data-v-41c586cf="" class="ant-descriptions-item-content">
+                                  <div data-v-41c586cf="" class="yx-outer">
+                                    <div data-v-41c586cf="" class="order-box">30</div>
+                                    <div data-v-41c586cf="" class="iblock">未填</div>
+                                    <br data-v-41c586cf="" /><!---->
+                                    <div data-v-41c586cf="" class="iblock red-color"></div>
+                                  </div>
+                                </td>
+                                <td data-v-41c586cf="" colspan="1" class="custom-td ant-descriptions-item-content">
+                                  <ul data-v-41c586cf="" class="view-ul">
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业1] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业2] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业3] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业4] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业5] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业6] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                  </ul>
+                                </td>
+                                <td
+                                  data-v-41c586cf=""
+                                  class="ant-descriptions-item-content txt-align"
+                                  style="width: 40px"
+                                >
+                                  是
+                                </td>
+                              </tr>
+                              <tr data-v-41c586cf="" class="ant-descriptions-row" style="display: none">
+                                <td data-v-41c586cf="" class="ant-descriptions-item-content">
+                                  <div data-v-41c586cf="" class="yx-outer">
+                                    <div data-v-41c586cf="" class="order-box">31</div>
+                                    <div data-v-41c586cf="" class="iblock">未填</div>
+                                    <br data-v-41c586cf="" /><!---->
+                                    <div data-v-41c586cf="" class="iblock red-color"></div>
+                                  </div>
+                                </td>
+                                <td data-v-41c586cf="" colspan="1" class="custom-td ant-descriptions-item-content">
+                                  <ul data-v-41c586cf="" class="view-ul">
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业1] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业2] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业3] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业4] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业5] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业6] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                  </ul>
+                                </td>
+                                <td
+                                  data-v-41c586cf=""
+                                  class="ant-descriptions-item-content txt-align"
+                                  style="width: 40px"
+                                >
+                                  是
+                                </td>
+                              </tr>
+                              <tr data-v-41c586cf="" class="ant-descriptions-row" style="display: none">
+                                <td data-v-41c586cf="" class="ant-descriptions-item-content">
+                                  <div data-v-41c586cf="" class="yx-outer">
+                                    <div data-v-41c586cf="" class="order-box">32</div>
+                                    <div data-v-41c586cf="" class="iblock">未填</div>
+                                    <br data-v-41c586cf="" /><!---->
+                                    <div data-v-41c586cf="" class="iblock red-color"></div>
+                                  </div>
+                                </td>
+                                <td data-v-41c586cf="" colspan="1" class="custom-td ant-descriptions-item-content">
+                                  <ul data-v-41c586cf="" class="view-ul">
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业1] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业2] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业3] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业4] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业5] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业6] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                  </ul>
+                                </td>
+                                <td
+                                  data-v-41c586cf=""
+                                  class="ant-descriptions-item-content txt-align"
+                                  style="width: 40px"
+                                >
+                                  是
+                                </td>
+                              </tr>
+                              <tr data-v-41c586cf="" class="ant-descriptions-row" style="display: none">
+                                <td data-v-41c586cf="" class="ant-descriptions-item-content">
+                                  <div data-v-41c586cf="" class="yx-outer">
+                                    <div data-v-41c586cf="" class="order-box">33</div>
+                                    <div data-v-41c586cf="" class="iblock">未填</div>
+                                    <br data-v-41c586cf="" /><!---->
+                                    <div data-v-41c586cf="" class="iblock red-color"></div>
+                                  </div>
+                                </td>
+                                <td data-v-41c586cf="" colspan="1" class="custom-td ant-descriptions-item-content">
+                                  <ul data-v-41c586cf="" class="view-ul">
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业1] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业2] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业3] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业4] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业5] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业6] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                  </ul>
+                                </td>
+                                <td
+                                  data-v-41c586cf=""
+                                  class="ant-descriptions-item-content txt-align"
+                                  style="width: 40px"
+                                >
+                                  是
+                                </td>
+                              </tr>
+                              <tr data-v-41c586cf="" class="ant-descriptions-row" style="display: none">
+                                <td data-v-41c586cf="" class="ant-descriptions-item-content">
+                                  <div data-v-41c586cf="" class="yx-outer">
+                                    <div data-v-41c586cf="" class="order-box">34</div>
+                                    <div data-v-41c586cf="" class="iblock">未填</div>
+                                    <br data-v-41c586cf="" /><!---->
+                                    <div data-v-41c586cf="" class="iblock red-color"></div>
+                                  </div>
+                                </td>
+                                <td data-v-41c586cf="" colspan="1" class="custom-td ant-descriptions-item-content">
+                                  <ul data-v-41c586cf="" class="view-ul">
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业1] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业2] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业3] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业4] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业5] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业6] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                  </ul>
+                                </td>
+                                <td
+                                  data-v-41c586cf=""
+                                  class="ant-descriptions-item-content txt-align"
+                                  style="width: 40px"
+                                >
+                                  是
+                                </td>
+                              </tr>
+                              <tr data-v-41c586cf="" class="ant-descriptions-row" style="display: none">
+                                <td data-v-41c586cf="" class="ant-descriptions-item-content">
+                                  <div data-v-41c586cf="" class="yx-outer">
+                                    <div data-v-41c586cf="" class="order-box">35</div>
+                                    <div data-v-41c586cf="" class="iblock">未填</div>
+                                    <br data-v-41c586cf="" /><!---->
+                                    <div data-v-41c586cf="" class="iblock red-color"></div>
+                                  </div>
+                                </td>
+                                <td data-v-41c586cf="" colspan="1" class="custom-td ant-descriptions-item-content">
+                                  <ul data-v-41c586cf="" class="view-ul">
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业1] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业2] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业3] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业4] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业5] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业6] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                  </ul>
+                                </td>
+                                <td
+                                  data-v-41c586cf=""
+                                  class="ant-descriptions-item-content txt-align"
+                                  style="width: 40px"
+                                >
+                                  是
+                                </td>
+                              </tr>
+                              <tr data-v-41c586cf="" class="ant-descriptions-row" style="display: none">
+                                <td data-v-41c586cf="" class="ant-descriptions-item-content">
+                                  <div data-v-41c586cf="" class="yx-outer">
+                                    <div data-v-41c586cf="" class="order-box">36</div>
+                                    <div data-v-41c586cf="" class="iblock">未填</div>
+                                    <br data-v-41c586cf="" /><!---->
+                                    <div data-v-41c586cf="" class="iblock red-color"></div>
+                                  </div>
+                                </td>
+                                <td data-v-41c586cf="" colspan="1" class="custom-td ant-descriptions-item-content">
+                                  <ul data-v-41c586cf="" class="view-ul">
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业1] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业2] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业3] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业4] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业5] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业6] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                  </ul>
+                                </td>
+                                <td
+                                  data-v-41c586cf=""
+                                  class="ant-descriptions-item-content txt-align"
+                                  style="width: 40px"
+                                >
+                                  是
+                                </td>
+                              </tr>
+                              <tr data-v-41c586cf="" class="ant-descriptions-row" style="display: none">
+                                <td data-v-41c586cf="" class="ant-descriptions-item-content">
+                                  <div data-v-41c586cf="" class="yx-outer">
+                                    <div data-v-41c586cf="" class="order-box">37</div>
+                                    <div data-v-41c586cf="" class="iblock">未填</div>
+                                    <br data-v-41c586cf="" /><!---->
+                                    <div data-v-41c586cf="" class="iblock red-color"></div>
+                                  </div>
+                                </td>
+                                <td data-v-41c586cf="" colspan="1" class="custom-td ant-descriptions-item-content">
+                                  <ul data-v-41c586cf="" class="view-ul">
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业1] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业2] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业3] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业4] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业5] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业6] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                  </ul>
+                                </td>
+                                <td
+                                  data-v-41c586cf=""
+                                  class="ant-descriptions-item-content txt-align"
+                                  style="width: 40px"
+                                >
+                                  是
+                                </td>
+                              </tr>
+                              <tr data-v-41c586cf="" class="ant-descriptions-row" style="display: none">
+                                <td data-v-41c586cf="" class="ant-descriptions-item-content">
+                                  <div data-v-41c586cf="" class="yx-outer">
+                                    <div data-v-41c586cf="" class="order-box">38</div>
+                                    <div data-v-41c586cf="" class="iblock">未填</div>
+                                    <br data-v-41c586cf="" /><!---->
+                                    <div data-v-41c586cf="" class="iblock red-color"></div>
+                                  </div>
+                                </td>
+                                <td data-v-41c586cf="" colspan="1" class="custom-td ant-descriptions-item-content">
+                                  <ul data-v-41c586cf="" class="view-ul">
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业1] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业2] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业3] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业4] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业5] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业6] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                  </ul>
+                                </td>
+                                <td
+                                  data-v-41c586cf=""
+                                  class="ant-descriptions-item-content txt-align"
+                                  style="width: 40px"
+                                >
+                                  是
+                                </td>
+                              </tr>
+                              <tr data-v-41c586cf="" class="ant-descriptions-row" style="display: none">
+                                <td data-v-41c586cf="" class="ant-descriptions-item-content">
+                                  <div data-v-41c586cf="" class="yx-outer">
+                                    <div data-v-41c586cf="" class="order-box">39</div>
+                                    <div data-v-41c586cf="" class="iblock">未填</div>
+                                    <br data-v-41c586cf="" /><!---->
+                                    <div data-v-41c586cf="" class="iblock red-color"></div>
+                                  </div>
+                                </td>
+                                <td data-v-41c586cf="" colspan="1" class="custom-td ant-descriptions-item-content">
+                                  <ul data-v-41c586cf="" class="view-ul">
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业1] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业2] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业3] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业4] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业5] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业6] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                  </ul>
+                                </td>
+                                <td
+                                  data-v-41c586cf=""
+                                  class="ant-descriptions-item-content txt-align"
+                                  style="width: 40px"
+                                >
+                                  是
+                                </td>
+                              </tr>
+                              <tr data-v-41c586cf="" class="ant-descriptions-row" style="display: none">
+                                <td data-v-41c586cf="" class="ant-descriptions-item-content">
+                                  <div data-v-41c586cf="" class="yx-outer">
+                                    <div data-v-41c586cf="" class="order-box">40</div>
+                                    <div data-v-41c586cf="" class="iblock">未填</div>
+                                    <br data-v-41c586cf="" /><!---->
+                                    <div data-v-41c586cf="" class="iblock red-color"></div>
+                                  </div>
+                                </td>
+                                <td data-v-41c586cf="" colspan="1" class="custom-td ant-descriptions-item-content">
+                                  <ul data-v-41c586cf="" class="view-ul">
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业1] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业2] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业3] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业4] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业5] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业6] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                  </ul>
+                                </td>
+                                <td
+                                  data-v-41c586cf=""
+                                  class="ant-descriptions-item-content txt-align"
+                                  style="width: 40px"
+                                >
+                                  是
+                                </td>
+                              </tr>
+                              <tr data-v-41c586cf="" class="ant-descriptions-row" style="display: none">
+                                <td data-v-41c586cf="" class="ant-descriptions-item-content">
+                                  <div data-v-41c586cf="" class="yx-outer">
+                                    <div data-v-41c586cf="" class="order-box">41</div>
+                                    <div data-v-41c586cf="" class="iblock">未填</div>
+                                    <br data-v-41c586cf="" /><!---->
+                                    <div data-v-41c586cf="" class="iblock red-color"></div>
+                                  </div>
+                                </td>
+                                <td data-v-41c586cf="" colspan="1" class="custom-td ant-descriptions-item-content">
+                                  <ul data-v-41c586cf="" class="view-ul">
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业1] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业2] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业3] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业4] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业5] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业6] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                  </ul>
+                                </td>
+                                <td
+                                  data-v-41c586cf=""
+                                  class="ant-descriptions-item-content txt-align"
+                                  style="width: 40px"
+                                >
+                                  是
+                                </td>
+                              </tr>
+                              <tr data-v-41c586cf="" class="ant-descriptions-row" style="display: none">
+                                <td data-v-41c586cf="" class="ant-descriptions-item-content">
+                                  <div data-v-41c586cf="" class="yx-outer">
+                                    <div data-v-41c586cf="" class="order-box">42</div>
+                                    <div data-v-41c586cf="" class="iblock">未填</div>
+                                    <br data-v-41c586cf="" /><!---->
+                                    <div data-v-41c586cf="" class="iblock red-color"></div>
+                                  </div>
+                                </td>
+                                <td data-v-41c586cf="" colspan="1" class="custom-td ant-descriptions-item-content">
+                                  <ul data-v-41c586cf="" class="view-ul">
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业1] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业2] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业3] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业4] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业5] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业6] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                  </ul>
+                                </td>
+                                <td
+                                  data-v-41c586cf=""
+                                  class="ant-descriptions-item-content txt-align"
+                                  style="width: 40px"
+                                >
+                                  是
+                                </td>
+                              </tr>
+                              <tr data-v-41c586cf="" class="ant-descriptions-row" style="display: none">
+                                <td data-v-41c586cf="" class="ant-descriptions-item-content">
+                                  <div data-v-41c586cf="" class="yx-outer">
+                                    <div data-v-41c586cf="" class="order-box">43</div>
+                                    <div data-v-41c586cf="" class="iblock">未填</div>
+                                    <br data-v-41c586cf="" /><!---->
+                                    <div data-v-41c586cf="" class="iblock red-color"></div>
+                                  </div>
+                                </td>
+                                <td data-v-41c586cf="" colspan="1" class="custom-td ant-descriptions-item-content">
+                                  <ul data-v-41c586cf="" class="view-ul">
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业1] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业2] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业3] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业4] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业5] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业6] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                  </ul>
+                                </td>
+                                <td
+                                  data-v-41c586cf=""
+                                  class="ant-descriptions-item-content txt-align"
+                                  style="width: 40px"
+                                >
+                                  是
+                                </td>
+                              </tr>
+                              <tr data-v-41c586cf="" class="ant-descriptions-row" style="display: none">
+                                <td data-v-41c586cf="" class="ant-descriptions-item-content">
+                                  <div data-v-41c586cf="" class="yx-outer">
+                                    <div data-v-41c586cf="" class="order-box">44</div>
+                                    <div data-v-41c586cf="" class="iblock">未填</div>
+                                    <br data-v-41c586cf="" /><!---->
+                                    <div data-v-41c586cf="" class="iblock red-color"></div>
+                                  </div>
+                                </td>
+                                <td data-v-41c586cf="" colspan="1" class="custom-td ant-descriptions-item-content">
+                                  <ul data-v-41c586cf="" class="view-ul">
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业1] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业2] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业3] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业4] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业5] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业6] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                  </ul>
+                                </td>
+                                <td
+                                  data-v-41c586cf=""
+                                  class="ant-descriptions-item-content txt-align"
+                                  style="width: 40px"
+                                >
+                                  是
+                                </td>
+                              </tr>
+                              <tr data-v-41c586cf="" class="ant-descriptions-row" style="display: none">
+                                <td data-v-41c586cf="" class="ant-descriptions-item-content">
+                                  <div data-v-41c586cf="" class="yx-outer">
+                                    <div data-v-41c586cf="" class="order-box">45</div>
+                                    <div data-v-41c586cf="" class="iblock">未填</div>
+                                    <br data-v-41c586cf="" /><!---->
+                                    <div data-v-41c586cf="" class="iblock red-color"></div>
+                                  </div>
+                                </td>
+                                <td data-v-41c586cf="" colspan="1" class="custom-td ant-descriptions-item-content">
+                                  <ul data-v-41c586cf="" class="view-ul">
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业1] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业2] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业3] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业4] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业5] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                    <li data-v-41c586cf="">
+                                      <div data-v-41c586cf="">[专业6] 未填</div>
+                                      <!---->
+                                      <div data-v-41c586cf="" class="red-color"></div>
+                                    </li>
+                                  </ul>
+                                </td>
+                                <td
+                                  data-v-41c586cf=""
+                                  class="ant-descriptions-item-content txt-align"
+                                  style="width: 40px"
+                                >
+                                  是
+                                </td>
+                              </tr>
+                              <tr data-v-41c586cf="" class="ant-descriptions-row">
+                                <td
+                                  data-v-41c586cf=""
+                                  colspan="3"
+                                  class="ant-descriptions-item-content txt-align"
+                                  style="border-bottom-width: 2px; color: rgb(53, 131, 255); font-weight: bold"
+                                >
+                                  提示：当前模块您已填报院校数为[12]个,未填报院校数为[33]个！
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div data-v-15e06433="" style="text-align: center; margin: 10px">
+                    <button
+                      data-v-15e06433=""
+                      type="button"
+                      class="col ant-btn ant-btn-primary ant-btn-background-ghost"
+                      style="margin: 5px; display: none"
+                    >
+                      <span>确认志愿</span></button
+                    ><button
+                      id="backButton2"
+                      data-v-15e06433=""
+                      type="button"
+                      class="ant-btn ant-btn-primary ant-btn-background-ghost"
+                      style="margin: 5px"
+                    >
+                      <span>返 回</span></button
+                    ><button
+                      data-v-15e06433=""
+                      type="button"
+                      class="ant-btn ant-btn-primary ant-btn-background-ghost"
+                      style="margin: 5px"
+                    >
+                      <span>打 印</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!----><!---->
+      </div>
+    </div>
+    <div id="footer" class="footer">
+      <div class="footerCon clearfix">
+        <span id="_span_jiucuo"
+          ><img
+            onclick="Link('4400000081')"
+            style="margin: 0; border: 0; cursor: pointer"
+            src="4_%E6%9F%A5%E7%9C%8B%E5%BF%97%E6%84%BF_files/ksy_jiucuo.png"
+          /> </span
+        ><span id="_ideConac"
+          ><a href="https://bszs.conac.cn/sitename?method=show&amp;id=0922834C0DCF1D41E053012819AC4180"
+            ><img src="4_%E6%9F%A5%E7%9C%8B%E5%BF%97%E6%84%BF_files/blue.png" /></a
+        ></span>
+        <div class="right">
+          <ul style="margin-top: 10px">
+            <li><a href="https://www.gdzwfw.gov.cn/" target="_blank">政务服务</a> |</li>
+            <li><a href="https://eea.gd.gov.cn/sitemap/content/post_2533113.html" target="_blank">网站导航</a></li>
+          </ul>
+          <p>主办单位：广东省教育考试院</p>
+          <p>版权所有：广东省教育考试院</p>
+          <p>
+            <a href="https://beian.miit.gov.cn/">粤ICP备05008847号</a>&nbsp;&nbsp;&nbsp;&nbsp;<a
+              href="https://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44010602003663"
+              ><img src="4_%E6%9F%A5%E7%9C%8B%E5%BF%97%E6%84%BF_files/ksy_ga.png" /> 粤公网安备44010602003663号</a
+            >&nbsp;&nbsp;&nbsp;&nbsp;网站标识码：4400000081
+          </p>
+          <p>联系电话：020-62833628</p>
+        </div>
+      </div>
+    </div>
+    <!---->
+    <script>
+      window._CONFIG = {};
+      // window._CONFIG['domianURL'] = 'http://localhost:8080/xxzs_ddk'
+      var localObj = window.location;
+      var contextPath = localObj.pathname.split("/")[1];
+      var domainUrl = contextPath;
+      if (domainUrl !== "") {
+        domainUrl = "/" + domainUrl;
+        window._CONFIG["uploadURL"] = domainUrl + "/upload.jsmeb";
+        window._CONFIG["downloadUrl"] = domainUrl + "/download.do";
+        window._CONFIG["pubDownloadUrl"] = domainUrl + "/public/download.do";
+      } else {
+        window._CONFIG["uploadURL"] = domainUrl + "/api/upload.jsmeb";
+        window._CONFIG["downloadUrl"] = domainUrl + "/api/download.do";
+        window._CONFIG["pubDownloadUrl"] = domainUrl + "/api/public/download.do";
+      }
+      window._CONFIG["domainUrl"] = domainUrl;
+      window._CONFIG["regUrl"] = domainUrl + "/reg";
+      // window._CONFIG['rcodeUrl'] = '/ks/login/login.addcode'
+      window._CONFIG["sysTitle"] = "广东省普通高考/学考报名";
+      window._CONFIG["sysTitleGk"] = "广东省普通高考报名";
+      window._CONFIG["sysTitleXk"] = "广东省学业水平考试报名";
+      window._CONFIG["sysTitleGz"] = "广东省高职自主招生报名";
+
+      // 跳转纠错连接
+      function Link(site_code) {
+        var url = "";
+        if (parent !== window) {
+          try {
+            url = window.top.location.href;
+          } catch (e) {
+            url = window.top.document.referrer;
+          }
+        }
+        if (url.length == 0) url = document.location.href;
+        //跳转至纠错系统填写页面
+      }
+    </script>
+    <div class="ant-message"><span></span></div>
+    <style></style>
+    <div>
+      <div class="ant-modal-root">
+        <div class="ant-modal-mask" style="display: none"></div>
+        <div tabindex="-1" role="dialog" aria-labelledby="rcDialogTitle0" class="ant-modal-wrap" style="display: none">
+          <div role="document" class="ant-modal" style="width: 520px; display: none">
+            <div tabindex="0" aria-hidden="true" style="width: 0px; height: 0px; overflow: hidden"></div>
+            <div class="ant-modal-content">
+              <div class="ant-modal-header"><div id="rcDialogTitle0" class="ant-modal-title">进入</div></div>
+              <div class="ant-modal-body">
+                <div style="height: 70px">
+                  <form class="ant-form ant-form-horizontal">
+                    <div class="ant-row ant-form-item">
+                      <div class="ant-col ant-col-6 ant-form-item-label"><label title="类型" class="">类型</label></div>
+                      <div class="ant-col ant-col-18 ant-form-item-control-wrapper">
+                        <div class="ant-form-item-control">
+                          <span class="ant-form-item-children"
+                            ><div class="ant-radio-group ant-radio-group-outline ant-radio-group-default">
+                              <label class="ant-radio-wrapper ant-radio-wrapper-checked"
+                                ><span class="ant-radio ant-radio-checked"
+                                  ><input type="radio" class="ant-radio-input" value="1" checked="checked" /><span
+                                    class="ant-radio-inner"
+                                  ></span></span
+                                ><span>高考志愿</span></label
+                              ><label class="ant-radio-wrapper"
+                                ><span class="ant-radio"
+                                  ><input type="radio" class="ant-radio-input" value="2" /><span
+                                    class="ant-radio-inner"
+                                  ></span></span
+                                ><span>学考报名</span></label
+                              ><label class="ant-radio-wrapper"
+                                ><span class="ant-radio"
+                                  ><input type="radio" class="ant-radio-input" value="3" /><span
+                                    class="ant-radio-inner"
+                                  ></span></span
+                                ><span>自主招生</span></label
+                              ><label class="ant-radio-wrapper"
+                                ><span class="ant-radio"
+                                  ><input type="radio" class="ant-radio-input" value="4" /><span
+                                    class="ant-radio-inner"
+                                  ></span></span
+                                ><span>专项计划</span></label
+                              >
+                            </div></span
+                          ><!---->
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+              <div class="ant-modal-footer">
+                <button
+                  type="button"
+                  class="ant-btn ant-btn-primary ant-btn-background-ghost"
+                  style="margin-right: 8px"
+                  ant-click-animating-without-extra-node="true"
+                >
+                  <span>确 定</span>
+                </button>
+              </div>
+            </div>
+            <div tabindex="0" aria-hidden="true" style="width: 0px; height: 0px; overflow: hidden"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      window.addEventListener("hashchange", function () {
+        const hash = window.location.hash;
+
+        if (hash == "#/xgk/ggxx") {
+          window.location.href = "./2_公告.html";
+        } else if (hash == "#/xgk/kszy/kszyInfo?index=11") {
+          window.location.href = "./2_志愿填报.html";
+        } else if (hash == "#/xgk/kszy/kszyInfo?index=12") {
+          window.location.href = "./2_征集填报.html";
+        }
+      });
+      document.getElementById("backButton1").addEventListener("click", () => {
+        window.location.href = "./3_志愿填报.html";
+      });
+      document.getElementById("backButton2").addEventListener("click", () => {
+        window.location.href = "./3_志愿填报.html";
+      });
+    </script>
+  </body>
+</html>

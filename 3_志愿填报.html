@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans" class=" ">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover"
+    />
+    <meta http-equiv="pragram" content="no-cache" />
+    <meta http-equiv="cache-control" content="no-cache，no-store,must-revalidate" />
+    <meta http-equiv="expires" content="0" />
+    <link rel="icon" href="https://pg.eeagd.edu.cn/ks/h5/ksy_logo.png" />
+    <title>高考报名</title>
+    <style>
+      #loading-mask {
+        position: fixed;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 100%;
+        background: #fff;
+        user-select: none;
+        z-index: 9999;
+        overflow: hidden;
+      }
+      .loading-wrapper {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -100%);
+      }
+      .loading-dot {
+        animation: antRotate 1.2s infinite linear;
+        transform: rotate(45deg);
+        position: relative;
+        display: inline-block;
+        font-size: 64px;
+        width: 64px;
+        height: 64px;
+        box-sizing: border-box;
+      }
+      .loading-dot i {
+        width: 22px;
+        height: 22px;
+        position: absolute;
+        display: block;
+        background-color: #1890ff;
+        border-radius: 100%;
+        transform: scale(0.75);
+        transform-origin: 50% 50%;
+        opacity: 0.3;
+        animation: antSpinMove 1s infinite linear alternate;
+      }
+      .loading-dot i:nth-child(1) {
+        top: 0;
+        left: 0;
+      }
+      .loading-dot i:nth-child(2) {
+        top: 0;
+        right: 0;
+        -webkit-animation-delay: 0.4s;
+        animation-delay: 0.4s;
+      }
+      .loading-dot i:nth-child(3) {
+        right: 0;
+        bottom: 0;
+        -webkit-animation-delay: 0.8s;
+        animation-delay: 0.8s;
+      }
+      .loading-dot i:nth-child(4) {
+        bottom: 0;
+        left: 0;
+        -webkit-animation-delay: 1.2s;
+        animation-delay: 1.2s;
+      }
+      @keyframes antRotate {
+        to {
+          -webkit-transform: rotate(405deg);
+          transform: rotate(405deg);
+        }
+      }
+      @-webkit-keyframes antRotate {
+        to {
+          -webkit-transform: rotate(405deg);
+          transform: rotate(405deg);
+        }
+      }
+      @keyframes antSpinMove {
+        to {
+          opacity: 1;
+        }
+      }
+      @-webkit-keyframes antSpinMove {
+        to {
+          opacity: 1;
+        }
+      }
+    </style>
+    <link rel="stylesheet" href="3_%E5%BF%97%E6%84%BF%E5%A1%AB%E6%8A%A5_files/ali_iconfont.css" />
+    <link rel="stylesheet" href="3_%E5%BF%97%E6%84%BF%E5%A1%AB%E6%8A%A5_files/ksy.css" />
+    <link href="https://pg.eeagd.edu.cn/ks/h5/static/css/chunk-0c37154c.724c2803.css" rel="prefetch" />
+    <link href="3_%E5%BF%97%E6%84%BF%E5%A1%AB%E6%8A%A5_files/fail.79783e22.css" rel="prefetch" />
+    <link href="3_%E5%BF%97%E6%84%BF%E5%A1%AB%E6%8A%A5_files/vendor.47956426.css" rel="prefetch" />
+    <link href="3_%E5%BF%97%E6%84%BF%E5%A1%AB%E6%8A%A5_files/app.f5d34a6c.css" rel="preload" as="style" />
+    <link href="3_%E5%BF%97%E6%84%BF%E5%A1%AB%E6%8A%A5_files/app.f5d34a6c.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="3_%E5%BF%97%E6%84%BF%E5%A1%AB%E6%8A%A5_files/vendor.47956426.css" />
+    <link rel="stylesheet" type="text/css" href="3_%E5%BF%97%E6%84%BF%E5%A1%AB%E6%8A%A5_files/fail.79783e22.css" />
+  </head>
+  <body>
+    <noscript
+      ><strong
+        >We're sorry but vue-antd-pro doesn't work properly without JavaScript enabled. Please enable it to
+        continue.</strong
+      ></noscript
+    >
+    <div id="app">
+      <div data-v-23e60d05="" class="page-header-index-wide">
+        <header data-v-23e60d05="" class="header ant-layout-header">
+          <!----><img
+            data-v-23e60d05=""
+            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAFqElEQVRoQ72ae4hUdRTHP99ZH/Qyiqh8C1LorGESBVEUa4GGYVDhM4LQUiorq92V7J9AzZ1FrSjEXn/5pH9CDcuo7F1EJbk7GmmYWYllWZnlrjsnznpXd+/embn3zuj5Z4e95/X9Pc7rXlEFMrNhwFSgDrgCuBj4F/ge+BR4DfhAUqEK5nqoUCUKzewyYDFwB5Apo+tHYAnwYjWBpAZgZg8COeCshIvwCTBNkgOqmBIDMDOXeRaYV4H1X4CbJeUr0NEpmgaAH5knKjUM7AeuleR/U1MiAGZ2C/BGGuBFPPwIuLGSOxEbgJn1AXYAo1IvV7TgbEmvpNWZBMA9wKtpDZWQ+wEYKakjje4kALb5dqcxEkOmTpLrT0yxAJjZhcBBoCaxhXgCyyQ9Ho+1J1dcALcCm9IYiCnzlaSrYvL2YIsL4GHgmTQGYsocknRRTN5UABYAT6cxEFPmuKS+MXlTAagPyoY0NuLIHJZ0QRzGME/cIzQbeCmNgZgyH0u6PiZvqh24DvCsebpolqRUOSbuDpwDHAL6nwYE7wATzkQi2wxMqjKAt4Apkv5KqzfWDrhyM5sIbElrKCT3B/AU8Jwkq0RnEgDO+xlwTQUG/wzyyQpJ/rtiig0g2IUrgc+Bfgkt/w48742QJP9dNUoEIABxr/e1MT04HnRviyQdjimTiC0xgABEI7C0jKX/gDsleQMUSUtbbJgyTM0YdSZGCAZjyMR+GXsL4v12WP9kVl5yR1IqAAGIu4EXgHMjNHttf7ukjVFWF+22of3aWCIx3ax0hSvRYca6QoGFC8ZoX1hfKgBmNha436cLwIAIJx+VtCLK+aV5m1QDay1aruimyvjbMsxpGK113ZkSATCzEUBzMAcqJrsVmBgVHptb7SEyLC+36iWOixk81pA9tTixAZiZr7jPgTwrFyM/96Ok3me2udWmINZb8UnI5na4r08Gby5XIiZHGZGnJJjekNUGf14WgJl5+fAycFeM8OBh8pEwX9N3NiTTRt7EecV0WIbBjaP0sz/PtdilZPDZUfTFNY50GLV+J0oCMDO/oK8DN8Vw3ueew6PmPLmdthpjZikdDVn18CWX94UuQWJtw2jNLArAzDxZeekwPobzzrJV0oQwr4fKTIY9gI9lilJSAB6djhkjSwFYA8yI6byzzZPk2bYHNeWtXifuTklKCsCVGSyIBGBm84Hl5YyGno+V9E1YJtdqWxBeCFYdAPB2LwBm5vP9LxLW/p64zpbUFvayudX2mRja9X8Zm9rEnIVZFb2kUUibdtmgcHQS/NQDgJn5jN8rzqvLrVjo+X5JJ53s/qw5b0et2wi+HQYldb5LX0R0agsDmBWEzIT+0yppTJRQNQEs3mGX9K3hQDc7pwAE8X43MCSp90CLJD96vSh8hDA2YsxpGKPujpQ12bn6YlX3BNfjCJnZXGBlWU3RDAckDSwC4E0TvcJrmDdNFDp5iYO3Li1ANiUAv8QDJB0Ny5+RMGpmPpP5MKXzXWI3SOqlY1HehvcXe8oVcCl2oNChIJGZmSegByoE0CgpMmHldtoarHRSTAFgQ0NW0zqjkJn5e6rBFQLYLmlclA4vJ2pEqymy+TkhUmBg18WOUcz9c0zUeqcmM/Nz31qh813i4yRtj9KVy9tUwbqi5XQQnTplQ9Gmuz4vp73Eqc9qfSermSVp0svh3CjptmJMubz5mN5LlHIvxSNVuPMFUd84Wsu6GByA97XerFSLxkt6r5iypl02OdPB6lK9QZSsjCMFmNtYKy8yT5IDeDf4xqFaAPb68EvSr8UUBtOIJsGUGLvhfcZrbdAYNZ1wAJ59R1bL+0DPl0Ff/FspvZ29Qg0zMOoEtcFHIi5y0Oi89Nv61bBh/uXyj0aij5WZ+cDp/CoDcHXfAjMlOZjTRr4D7eW6pQqse4b2l9irgK8rHeRG+fE//8obWAWCWb0AAAAASUVORK5CYII="
+            alt=""
+            class="logo"
+          />
+          广东省普通高考报名
+          <div data-v-23e60d05="" class="userInfo">
+            <img
+              data-v-23e60d05=""
+              src="data:image/png;base64,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"
+              alt=""
+              class="user"
+            /><span data-v-23e60d05="">刘雅婷</span><span data-v-23e60d05="" class="quit">退出</span
+            ><!----><!---->
+          </div>
+        </header>
+        <div data-v-23e60d05="" class="ant-card">
+          <div class="ant-card-body" style="padding: 0px">
+            <div data-v-23e60d05="" class="account-settings-info-main desktop">
+              <div data-v-23e60d05="" class="account-settings-info-left">
+                <ul
+                  data-v-23e60d05=""
+                  role="menu"
+                  class="ant-menu ant-menu-inline ant-menu-root ant-menu-dark"
+                  type="inner"
+                  style="border: 0px; width: auto"
+                >
+                  <li data-v-23e60d05="" role="menuitem" class="ant-menu-item" style="padding-left: 24px">
+                    <a data-v-23e60d05="" href="#/xgk/ggxx" class=""
+                      ><i data-v-23e60d05="" class="iconfont icongonggao"></i>公告
+                    </a>
+                  </li>
+                  <li data-v-23e60d05="" role="menuitem" class="ant-menu-item" style="padding-left: 24px">
+                    <a data-v-23e60d05="" href="#/xgk/ksInfo" class=""
+                      ><i data-v-23e60d05="" class="iconfont icongonggao"></i>考生信息
+                    </a>
+                  </li>
+                  <li data-v-23e60d05="" role="menuitem" class="ant-menu-submenu ant-menu-submenu-inline">
+                    <div aria-haspopup="true" class="ant-menu-submenu-title" style="padding-left: 24px">
+                      <span data-v-23e60d05="" class="submenu-title-wrapper"
+                        ><i data-v-23e60d05="" class="iconfont iconbaoming"></i>资格申请 </span
+                      ><i class="ant-menu-submenu-arrow"></i>
+                    </div>
+                    <div></div>
+                  </li>
+                  <li data-v-23e60d05="" role="menuitem" class="ant-menu-submenu ant-menu-submenu-inline">
+                    <div aria-haspopup="true" class="ant-menu-submenu-title" style="padding-left: 24px">
+                      <span data-v-23e60d05="" class="submenu-title-wrapper"
+                        ><i data-v-23e60d05="" class="iconfont iconbaoming"></i>预报名 </span
+                      ><i class="ant-menu-submenu-arrow"></i>
+                    </div>
+                    <div></div>
+                  </li>
+                  <li
+                    data-v-23e60d05=""
+                    role="menuitem"
+                    class="ant-menu-submenu ant-menu-submenu-inline ant-menu-submenu-open"
+                  >
+                    <div
+                      aria-haspopup="true"
+                      class="ant-menu-submenu-title"
+                      style="padding-left: 24px"
+                      aria-expanded="true"
+                      aria-owns="/xgk/zy3$Menu"
+                    >
+                      <span data-v-23e60d05="" class="submenu-title-wrapper"
+                        ><i data-v-23e60d05="" class="iconfont iconbaoming"></i>志愿 </span
+                      ><i class="ant-menu-submenu-arrow"></i>
+                    </div>
+                    <ul role="menu" class="ant-menu ant-menu-inline ant-menu-sub">
+                      <li data-v-23e60d05="" role="menuitem" class="ant-menu-item" style="padding-left: 48px">
+                        <a data-v-23e60d05="" href="#/xgk/kszy/ZsjhMl/11?index=11" class=""
+                          ><i data-v-23e60d05="" class="iconfont iconyouer"></i>普高计划查询
+                        </a>
+                      </li>
+                      <li data-v-23e60d05="" role="menuitem" class="ant-menu-item" style="padding-left: 48px">
+                        <a data-v-23e60d05="" href="#/xgk/kszy/ZsjhMl/12?index=12" class=""
+                          ><i data-v-23e60d05="" class="iconfont iconyouer"></i>普高征集查询
+                        </a>
+                      </li>
+                      <li
+                        data-v-23e60d05=""
+                        role="menuitem"
+                        class="ant-menu-item ant-menu-item-selected"
+                        style="padding-left: 48px"
+                      >
+                        <a data-v-23e60d05="" href="#/xgk/kszy/kszyInfo?index=11" class=""
+                          ><i data-v-23e60d05="" class="iconfont iconyouer"></i>普高志愿填报
+                        </a>
+                      </li>
+                      <li data-v-23e60d05="" role="menuitem" class="ant-menu-item" style="padding-left: 48px">
+                        <a data-v-23e60d05="" href="#/xgk/kszy/kszyInfo?index=12" class=""
+                          ><i data-v-23e60d05="" class="iconfont iconyouer"></i>普高征集填报
+                        </a>
+                      </li>
+                    </ul>
+                  </li>
+                  <li data-v-23e60d05="" role="menuitem" class="ant-menu-submenu ant-menu-submenu-inline">
+                    <div aria-haspopup="true" class="ant-menu-submenu-title" style="padding-left: 24px">
+                      <span data-v-23e60d05="" class="submenu-title-wrapper"
+                        ><i data-v-23e60d05="" class="iconfont iconbaoming"></i>考务信息 </span
+                      ><i class="ant-menu-submenu-arrow"></i>
+                    </div>
+                    <div></div>
+                  </li>
+                  <li data-v-23e60d05="" role="menuitem" class="ant-menu-submenu ant-menu-submenu-inline">
+                    <div aria-haspopup="true" class="ant-menu-submenu-title" style="padding-left: 24px">
+                      <span data-v-23e60d05="" class="submenu-title-wrapper"
+                        ><i data-v-23e60d05="" class="iconfont iconbaoming"></i>学考成绩 </span
+                      ><i class="ant-menu-submenu-arrow"></i>
+                    </div>
+                    <div></div>
+                  </li>
+                </ul>
+              </div>
+              <div data-v-23e60d05="" class="account-settings-info-right white">
+                <div data-v-1c85ab02="" data-v-23e60d05="" class="kszy-list">
+                  <!----><!---->
+                  <div data-v-1c85ab02="" style="text-align: center; font-size: larger; font-weight: bold; margin: 5px">
+                    考生志愿填报
+                  </div>
+                  <div data-v-21835dbc="" data-v-1c85ab02="">
+                    <div data-v-21835dbc="">
+                      <button
+                        data-v-21835dbc=""
+                        type="button"
+                        class="ant-btn ant-btn-primary ant-btn-background-ghost"
+                        style="margin: 5px"
+                      >
+                        <span>查询专业目录</span></button
+                      ><button
+                        data-v-21835dbc=""
+                        type="button"
+                        class="ant-btn ant-btn-primary ant-btn-background-ghost"
+                        style="margin: 5px"
+                      >
+                        <span>信息核对页面</span></button
+                      ><button
+                        data-v-21835dbc=""
+                        type="button"
+                        class="ant-btn ant-btn-primary ant-btn-background-ghost"
+                        style="margin: 5px"
+                      >
+                        <span>查询所报志愿</span>
+                      </button>
+                    </div>
+                  </div>
+                  <div data-v-73c0b208="" data-v-1c85ab02="">
+                    <table
+                      data-v-73c0b208=""
+                      style="width: 90%; margin-top: 15px; margin-bottom: 5px; font-weight: bolder"
+                    >
+                      <tr data-v-73c0b208="">
+                        <td data-v-73c0b208="" style="width: 80px">志愿进度：</td>
+                        <td data-v-73c0b208="">
+                          <div data-v-73c0b208="" class="custom-step-hx">
+                            <div
+                              data-v-73c0b208=""
+                              class="steps ant-steps ant-steps-horizontal ant-steps-small ant-steps-label-horizontal"
+                              responsive="false"
+                            >
+                              <div data-v-73c0b208="" class="step ant-steps-item ant-steps-item-finish">
+                                <div class="ant-steps-item-container">
+                                  <div class="ant-steps-item-tail"></div>
+                                  <div class="ant-steps-item-icon">
+                                    <span class="ant-steps-icon"
+                                      ><i aria-label="图标: check" class="anticon anticon-check ant-steps-finish-icon"
+                                        ><svg
+                                          viewBox="64 64 896 896"
+                                          data-icon="check"
+                                          width="1em"
+                                          height="1em"
+                                          fill="currentColor"
+                                          aria-hidden="true"
+                                          focusable="false"
+                                          class=""
+                                        >
+                                          <path
+                                            d="M912 190h-69.9c-9.8 0-19.1 4.5-25.1 12.2L404.7 724.5 207 474a32 32 0 0 0-25.1-12.2H112c-6.7 0-10.4 7.7-6.3 12.9l273.9 347c12.8 16.2 37.4 16.2 50.3 0l488.4-618.9c4.1-5.1.4-12.8-6.3-12.8z"
+                                          ></path></svg></i
+                                    ></span>
+                                  </div>
+                                  <div class="ant-steps-item-content">
+                                    <div class="ant-steps-item-title">未填报</div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div data-v-73c0b208="" class="step ant-steps-item ant-steps-item-finish">
+                                <div class="ant-steps-item-container">
+                                  <div class="ant-steps-item-tail"></div>
+                                  <div class="ant-steps-item-icon">
+                                    <span class="ant-steps-icon"
+                                      ><i aria-label="图标: check" class="anticon anticon-check ant-steps-finish-icon"
+                                        ><svg
+                                          viewBox="64 64 896 896"
+                                          data-icon="check"
+                                          width="1em"
+                                          height="1em"
+                                          fill="currentColor"
+                                          aria-hidden="true"
+                                          focusable="false"
+                                          class=""
+                                        >
+                                          <path
+                                            d="M912 190h-69.9c-9.8 0-19.1 4.5-25.1 12.2L404.7 724.5 207 474a32 32 0 0 0-25.1-12.2H112c-6.7 0-10.4 7.7-6.3 12.9l273.9 347c12.8 16.2 37.4 16.2 50.3 0l488.4-618.9c4.1-5.1.4-12.8-6.3-12.8z"
+                                          ></path></svg></i
+                                    ></span>
+                                  </div>
+                                  <div class="ant-steps-item-content">
+                                    <div class="ant-steps-item-title">已填报未确认</div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div
+                                data-v-73c0b208=""
+                                class="step ant-steps-item ant-steps-item-process ant-steps-item-active"
+                              >
+                                <div class="ant-steps-item-container">
+                                  <div class="ant-steps-item-tail"></div>
+                                  <div class="ant-steps-item-icon"><span class="ant-steps-icon">3</span></div>
+                                  <div class="ant-steps-item-content">
+                                    <div class="ant-steps-item-title">已确认（已完成）</div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                    </table>
+                    <div data-v-73c0b208="" class="ant-descriptions ant-descriptions-small ant-descriptions-bordered">
+                      <div class="ant-descriptions-view">
+                        <table>
+                          <tbody>
+                            <tr class="ant-descriptions-row">
+                              <th class="ant-descriptions-item-label ant-descriptions-item-colon">考生号</th>
+                              <td colspan="1" class="ant-descriptions-item-content">2000192638</td>
+                              <th class="ant-descriptions-item-label ant-descriptions-item-colon">姓名</th>
+                              <td colspan="1" class="ant-descriptions-item-content">刘雅婷</td>
+                              <th class="ant-descriptions-item-label ant-descriptions-item-colon">志愿状态</th>
+                              <td colspan="3" class="ant-descriptions-item-content">
+                                <span data-v-73c0b208="">已确认</span>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                    <div data-v-73c0b208="" class="ant-descriptions ant-descriptions-small ant-descriptions-bordered">
+                      <div class="ant-descriptions-title">
+                        <div data-v-73c0b208="">
+                          <div data-v-73c0b208="">
+                            <span data-v-73c0b208="" class="des-title">考生信息</span
+                            ><i
+                              data-v-73c0b208=""
+                              aria-label="图标: up"
+                              class="anticon anticon-up"
+                              style="color: rgb(53, 131, 255)"
+                              ><svg
+                                viewBox="64 64 896 896"
+                                data-icon="up"
+                                width="1em"
+                                height="1em"
+                                fill="currentColor"
+                                aria-hidden="true"
+                                focusable="false"
+                                class=""
+                              >
+                                <path
+                                  d="M890.5 755.3L537.9 269.2c-12.8-17.6-39-17.6-51.7 0L133.5 755.3A8 8 0 0 0 140 768h75c5.1 0 9.9-2.5 12.9-6.6L512 369.8l284.1 391.6c3 4.1 7.8 6.6 12.9 6.6h75c6.5 0 10.3-7.4 6.5-12.7z"
+                                ></path></svg
+                            ></i>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="ant-descriptions-view">
+                        <table>
+                          <tbody>
+                            <tr class="ant-descriptions-row">
+                              <th class="ant-descriptions-item-label ant-descriptions-item-colon">性别</th>
+                              <td colspan="1" class="ant-descriptions-item-content">女</td>
+                              <th class="ant-descriptions-item-label ant-descriptions-item-colon">身份证号</th>
+                              <td colspan="1" class="ant-descriptions-item-content">430423200608230262</td>
+                              <th class="ant-descriptions-item-label ant-descriptions-item-colon">考生属性</th>
+                              <td colspan="1" class="ant-descriptions-item-content">普通类(物理)</td>
+                            </tr>
+                            <tr class="ant-descriptions-row">
+                              <th class="ant-descriptions-item-label ant-descriptions-item-colon">考生科目</th>
+                              <td colspan="3" class="ant-descriptions-item-content">
+                                物理，生物学，地理，语文，数学，外语(英语)，英语听说
+                              </td>
+                              <th class="ant-descriptions-item-label ant-descriptions-item-colon">专业类别</th>
+                              <td colspan="1" class="ant-descriptions-item-content">普通类(物理)</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    data-v-1c85ab02=""
+                    class="table-des ant-descriptions ant-descriptions-small ant-descriptions-bordered"
+                    style="margin-top: 10px"
+                  >
+                    <div data-v-1c85ab02="" class="ant-descriptions-view">
+                      <table data-v-1c85ab02="">
+                        <tbody data-v-1c85ab02="">
+                          <tr data-v-1c85ab02="" class="ant-descriptions-row">
+                            <th
+                              data-v-1c85ab02=""
+                              class="ant-descriptions-item-label ant-descriptions-item-colon txt-align fw"
+                            >
+                              批次
+                            </th>
+                            <th
+                              data-v-1c85ab02=""
+                              class="ant-descriptions-item-label ant-descriptions-item-colon txt-align fw"
+                            >
+                              填报状态
+                            </th>
+                            <th
+                              data-v-1c85ab02=""
+                              class="ant-descriptions-item-label ant-descriptions-item-colon txt-align fw"
+                            >
+                              操作
+                            </th>
+                          </tr>
+                          <tr data-v-1c85ab02="" class="ant-descriptions-row">
+                            <th
+                              data-v-1c85ab02=""
+                              class="ant-descriptions-item-label ant-descriptions-item-colon txt-align"
+                            >
+                              提前批本科.空军、海军招飞
+                            </th>
+                            <td data-v-1c85ab02="" class="ant-descriptions-item-content">未填报</td>
+                            <td data-v-1c85ab02="" class="custom-td ant-descriptions-item-content">
+                              <ul data-v-1c85ab02="" class="des-ul">
+                                <li data-v-1c85ab02="">
+                                  <button
+                                    data-v-1c85ab02=""
+                                    disabled="disabled"
+                                    type="button"
+                                    class="ant-btn ant-btn-primary ant-btn-background-ghost"
+                                  >
+                                    <span>查 看</span>
+                                  </button>
+                                </li>
+                                <li data-v-1c85ab02="">
+                                  <button
+                                    data-v-1c85ab02=""
+                                    disabled="disabled"
+                                    type="button"
+                                    class="ant-btn ant-btn-primary ant-btn-background-ghost"
+                                  >
+                                    <span>填报/修改</span>
+                                  </button>
+                                </li>
+                                <li data-v-1c85ab02="">
+                                  <button
+                                    data-v-1c85ab02=""
+                                    disabled="disabled"
+                                    type="button"
+                                    class="ant-btn ant-btn-primary ant-btn-background-ghost"
+                                  >
+                                    <span>清 空</span>
+                                  </button>
+                                </li>
+                              </ul>
+                            </td>
+                          </tr>
+                          <tr data-v-1c85ab02="" class="ant-descriptions-row">
+                            <th
+                              data-v-1c85ab02=""
+                              class="ant-descriptions-item-label ant-descriptions-item-colon txt-align"
+                            >
+                              提前批本科.军检院校(含公安)
+                            </th>
+                            <td data-v-1c85ab02="" class="ant-descriptions-item-content">未填报</td>
+                            <td data-v-1c85ab02="" class="custom-td ant-descriptions-item-content">
+                              <ul data-v-1c85ab02="" class="des-ul">
+                                <li data-v-1c85ab02="">
+                                  <button
+                                    data-v-1c85ab02=""
+                                    disabled="disabled"
+                                    type="button"
+                                    class="ant-btn ant-btn-primary ant-btn-background-ghost"
+                                  >
+                                    <span>查 看</span>
+                                  </button>
+                                </li>
+                                <li data-v-1c85ab02="">
+                                  <button
+                                    data-v-1c85ab02=""
+                                    disabled="disabled"
+                                    type="button"
+                                    class="ant-btn ant-btn-primary ant-btn-background-ghost"
+                                  >
+                                    <span>填报/修改</span>
+                                  </button>
+                                </li>
+                                <li data-v-1c85ab02="">
+                                  <button
+                                    data-v-1c85ab02=""
+                                    disabled="disabled"
+                                    type="button"
+                                    class="ant-btn ant-btn-primary ant-btn-background-ghost"
+                                  >
+                                    <span>清 空</span>
+                                  </button>
+                                </li>
+                              </ul>
+                            </td>
+                          </tr>
+                          <tr data-v-1c85ab02="" class="ant-descriptions-row">
+                            <th
+                              data-v-1c85ab02=""
+                              class="ant-descriptions-item-label ant-descriptions-item-colon txt-align"
+                            >
+                              提前批本科.非军检院校
+                            </th>
+                            <td data-v-1c85ab02="" class="ant-descriptions-item-content">未填报</td>
+                            <td data-v-1c85ab02="" class="custom-td ant-descriptions-item-content">
+                              <ul data-v-1c85ab02="" class="des-ul">
+                                <li data-v-1c85ab02="">
+                                  <button
+                                    data-v-1c85ab02=""
+                                    disabled="disabled"
+                                    type="button"
+                                    class="ant-btn ant-btn-primary ant-btn-background-ghost"
+                                  >
+                                    <span>查 看</span>
+                                  </button>
+                                </li>
+                                <li data-v-1c85ab02="">
+                                  <button
+                                    data-v-1c85ab02=""
+                                    disabled="disabled"
+                                    type="button"
+                                    class="ant-btn ant-btn-primary ant-btn-background-ghost"
+                                  >
+                                    <span>填报/修改</span>
+                                  </button>
+                                </li>
+                                <li data-v-1c85ab02="">
+                                  <button
+                                    data-v-1c85ab02=""
+                                    disabled="disabled"
+                                    type="button"
+                                    class="ant-btn ant-btn-primary ant-btn-background-ghost"
+                                  >
+                                    <span>清 空</span>
+                                  </button>
+                                </li>
+                              </ul>
+                            </td>
+                          </tr>
+                          <tr data-v-1c85ab02="" class="ant-descriptions-row">
+                            <th
+                              data-v-1c85ab02=""
+                              class="ant-descriptions-item-label ant-descriptions-item-colon txt-align"
+                            >
+                              提前批本科.教师专项
+                            </th>
+                            <td data-v-1c85ab02="" class="ant-descriptions-item-content">未填报</td>
+                            <td data-v-1c85ab02="" class="custom-td ant-descriptions-item-content">
+                              <ul data-v-1c85ab02="" class="des-ul">
+                                <li data-v-1c85ab02="">
+                                  <button
+                                    data-v-1c85ab02=""
+                                    disabled="disabled"
+                                    type="button"
+                                    class="ant-btn ant-btn-primary ant-btn-background-ghost"
+                                  >
+                                    <span>查 看</span>
+                                  </button>
+                                </li>
+                                <li data-v-1c85ab02="">
+                                  <button
+                                    data-v-1c85ab02=""
+                                    disabled="disabled"
+                                    type="button"
+                                    class="ant-btn ant-btn-primary ant-btn-background-ghost"
+                                  >
+                                    <span>填报/修改</span>
+                                  </button>
+                                </li>
+                                <li data-v-1c85ab02="">
+                                  <button
+                                    data-v-1c85ab02=""
+                                    disabled="disabled"
+                                    type="button"
+                                    class="ant-btn ant-btn-primary ant-btn-background-ghost"
+                                  >
+                                    <span>清 空</span>
+                                  </button>
+                                </li>
+                              </ul>
+                            </td>
+                          </tr>
+                          <tr data-v-1c85ab02="" class="ant-descriptions-row">
+                            <th
+                              data-v-1c85ab02=""
+                              class="ant-descriptions-item-label ant-descriptions-item-colon txt-align"
+                            >
+                              提前批本科.卫生专项
+                            </th>
+                            <td data-v-1c85ab02="" class="ant-descriptions-item-content">未填报</td>
+                            <td data-v-1c85ab02="" class="custom-td ant-descriptions-item-content">
+                              <ul data-v-1c85ab02="" class="des-ul">
+                                <li data-v-1c85ab02="">
+                                  <button
+                                    data-v-1c85ab02=""
+                                    disabled="disabled"
+                                    type="button"
+                                    class="ant-btn ant-btn-primary ant-btn-background-ghost"
+                                  >
+                                    <span>查 看</span>
+                                  </button>
+                                </li>
+                                <li data-v-1c85ab02="">
+                                  <button
+                                    data-v-1c85ab02=""
+                                    disabled="disabled"
+                                    type="button"
+                                    class="ant-btn ant-btn-primary ant-btn-background-ghost"
+                                  >
+                                    <span>填报/修改</span>
+                                  </button>
+                                </li>
+                                <li data-v-1c85ab02="">
+                                  <button
+                                    data-v-1c85ab02=""
+                                    disabled="disabled"
+                                    type="button"
+                                    class="ant-btn ant-btn-primary ant-btn-background-ghost"
+                                  >
+                                    <span>清 空</span>
+                                  </button>
+                                </li>
+                              </ul>
+                            </td>
+                          </tr>
+                          <tr data-v-1c85ab02="" class="ant-descriptions-row">
+                            <th
+                              data-v-1c85ab02=""
+                              class="ant-descriptions-item-label ant-descriptions-item-colon txt-align"
+                            >
+                              特殊类型招生
+                            </th>
+                            <td data-v-1c85ab02="" class="ant-descriptions-item-content">未填报</td>
+                            <td data-v-1c85ab02="" class="custom-td ant-descriptions-item-content">
+                              <ul data-v-1c85ab02="" class="des-ul">
+                                <li data-v-1c85ab02="">
+                                  <button
+                                    data-v-1c85ab02=""
+                                    disabled="disabled"
+                                    type="button"
+                                    class="ant-btn ant-btn-primary ant-btn-background-ghost"
+                                  >
+                                    <span>查 看</span>
+                                  </button>
+                                </li>
+                                <li data-v-1c85ab02="">
+                                  <button
+                                    data-v-1c85ab02=""
+                                    disabled="disabled"
+                                    type="button"
+                                    class="ant-btn ant-btn-primary ant-btn-background-ghost"
+                                  >
+                                    <span>填报/修改</span>
+                                  </button>
+                                </li>
+                                <li data-v-1c85ab02="">
+                                  <button
+                                    data-v-1c85ab02=""
+                                    disabled="disabled"
+                                    type="button"
+                                    class="ant-btn ant-btn-primary ant-btn-background-ghost"
+                                  >
+                                    <span>清 空</span>
+                                  </button>
+                                </li>
+                              </ul>
+                            </td>
+                          </tr>
+                          <tr data-v-1c85ab02="" class="ant-descriptions-row">
+                            <th
+                              data-v-1c85ab02=""
+                              class="ant-descriptions-item-label ant-descriptions-item-colon txt-align"
+                            >
+                              本科
+                            </th>
+                            <td data-v-1c85ab02="" class="ant-descriptions-item-content">未填报</td>
+                            <td data-v-1c85ab02="" class="custom-td ant-descriptions-item-content">
+                              <ul data-v-1c85ab02="" class="des-ul">
+                                <li data-v-1c85ab02="">
+                                  <button
+                                    data-v-1c85ab02=""
+                                    disabled="disabled"
+                                    type="button"
+                                    class="ant-btn ant-btn-primary ant-btn-background-ghost"
+                                  >
+                                    <span>查 看</span>
+                                  </button>
+                                </li>
+                                <li data-v-1c85ab02="">
+                                  <button
+                                    data-v-1c85ab02=""
+                                    disabled="disabled"
+                                    type="button"
+                                    class="ant-btn ant-btn-primary ant-btn-background-ghost"
+                                  >
+                                    <span>填报/修改</span>
+                                  </button>
+                                </li>
+                                <li data-v-1c85ab02="">
+                                  <button
+                                    data-v-1c85ab02=""
+                                    disabled="disabled"
+                                    type="button"
+                                    class="ant-btn ant-btn-primary ant-btn-background-ghost"
+                                  >
+                                    <span>清 空</span>
+                                  </button>
+                                </li>
+                              </ul>
+                            </td>
+                          </tr>
+                          <tr data-v-1c85ab02="" class="ant-descriptions-row">
+                            <th
+                              data-v-1c85ab02=""
+                              class="ant-descriptions-item-label ant-descriptions-item-colon txt-align"
+                            >
+                              提前批专科.定向培养军士
+                            </th>
+                            <td data-v-1c85ab02="" class="ant-descriptions-item-content">未填报</td>
+                            <td data-v-1c85ab02="" class="custom-td ant-descriptions-item-content">
+                              <ul data-v-1c85ab02="" class="des-ul">
+                                <li data-v-1c85ab02="">
+                                  <button
+                                    data-v-1c85ab02=""
+                                    disabled="disabled"
+                                    type="button"
+                                    class="ant-btn ant-btn-primary ant-btn-background-ghost"
+                                  >
+                                    <span>查 看</span>
+                                  </button>
+                                </li>
+                                <li data-v-1c85ab02="">
+                                  <button
+                                    data-v-1c85ab02=""
+                                    disabled="disabled"
+                                    type="button"
+                                    class="ant-btn ant-btn-primary ant-btn-background-ghost"
+                                  >
+                                    <span>填报/修改</span>
+                                  </button>
+                                </li>
+                                <li data-v-1c85ab02="">
+                                  <button
+                                    data-v-1c85ab02=""
+                                    disabled="disabled"
+                                    type="button"
+                                    class="ant-btn ant-btn-primary ant-btn-background-ghost"
+                                  >
+                                    <span>清 空</span>
+                                  </button>
+                                </li>
+                              </ul>
+                            </td>
+                          </tr>
+                          <tr data-v-1c85ab02="" class="ant-descriptions-row">
+                            <th
+                              data-v-1c85ab02=""
+                              class="ant-descriptions-item-label ant-descriptions-item-colon txt-align"
+                            >
+                              提前批专科.卫生专项
+                            </th>
+                            <td data-v-1c85ab02="" class="ant-descriptions-item-content">未填报</td>
+                            <td data-v-1c85ab02="" class="custom-td ant-descriptions-item-content">
+                              <ul data-v-1c85ab02="" class="des-ul">
+                                <li data-v-1c85ab02="">
+                                  <button
+                                    data-v-1c85ab02=""
+                                    disabled="disabled"
+                                    type="button"
+                                    class="ant-btn ant-btn-primary ant-btn-background-ghost"
+                                  >
+                                    <span>查 看</span>
+                                  </button>
+                                </li>
+                                <li data-v-1c85ab02="">
+                                  <button
+                                    data-v-1c85ab02=""
+                                    disabled="disabled"
+                                    type="button"
+                                    class="ant-btn ant-btn-primary ant-btn-background-ghost"
+                                  >
+                                    <span>填报/修改</span>
+                                  </button>
+                                </li>
+                                <li data-v-1c85ab02="">
+                                  <button
+                                    data-v-1c85ab02=""
+                                    disabled="disabled"
+                                    type="button"
+                                    class="ant-btn ant-btn-primary ant-btn-background-ghost"
+                                  >
+                                    <span>清 空</span>
+                                  </button>
+                                </li>
+                              </ul>
+                            </td>
+                          </tr>
+                          <tr data-v-1c85ab02="" class="ant-descriptions-row">
+                            <th
+                              data-v-1c85ab02=""
+                              class="ant-descriptions-item-label ant-descriptions-item-colon txt-align"
+                            >
+                              专科
+                            </th>
+                            <td data-v-1c85ab02="" class="ant-descriptions-item-content blue-color">已确认</td>
+                            <td data-v-1c85ab02="" class="custom-td ant-descriptions-item-content">
+                              <ul data-v-1c85ab02="" class="des-ul">
+                                <li data-v-1c85ab02="">
+                                  <button
+                                    id="checkButton"
+                                    data-v-1c85ab02=""
+                                    type="button"
+                                    class="ant-btn ant-btn-primary ant-btn-background-ghost"
+                                  >
+                                    <span>查 看</span>
+                                  </button>
+                                </li>
+                                <li data-v-1c85ab02="">
+                                  <button
+                                    data-v-1c85ab02=""
+                                    disabled="disabled"
+                                    type="button"
+                                    class="ant-btn ant-btn-primary ant-btn-background-ghost"
+                                  >
+                                    <span>填报/修改</span>
+                                  </button>
+                                </li>
+                                <li data-v-1c85ab02="">
+                                  <button
+                                    data-v-1c85ab02=""
+                                    disabled="disabled"
+                                    type="button"
+                                    class="ant-btn ant-btn-primary ant-btn-background-ghost"
+                                  >
+                                    <span>清 空</span>
+                                  </button>
+                                </li>
+                              </ul>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  <div data-v-1c85ab02="" style="text-align: center; margin: 10px">
+                    <button
+                      id="previewButton"
+                      data-v-1c85ab02=""
+                      type="button"
+                      class="ant-btn ant-btn-primary ant-btn-background-ghost"
+                      style="margin: 5px"
+                    >
+                      <span>预览志愿</span></button
+                    ><button
+                      data-v-1c85ab02=""
+                      type="button"
+                      class="ant-btn ant-btn-primary ant-btn-background-ghost"
+                      style="margin: 5px"
+                      disabled="disabled"
+                    >
+                      <span>确认志愿</span></button
+                    ><span data-v-1c85ab02="" class="col" style="display: inline-block; cursor: not-allowed"
+                      ><button
+                        data-v-1c85ab02=""
+                        disabled="disabled"
+                        type="button"
+                        class="ant-btn ant-btn-primary ant-btn-background-ghost"
+                        style="margin: 5px; pointer-events: none"
+                      >
+                        <span>取消确认(剩余0次机会)</span>
+                      </button></span
+                    >
+                  </div>
+                  <div data-v-1c85ab02="" class="tip">
+                    <div data-v-1c85ab02="" class="tip-title">注意事项：</div>
+                    <p data-v-1c85ab02="">
+                      1、
+                      <span data-v-1c85ab02="" class="red-color"
+                        >所有批次志愿填报完毕后，请点击“确认志愿”按钮进行志愿最终确认。</span
+                      >
+                    </p>
+                    <p data-v-1c85ab02="">
+                      2、
+                      <span data-v-1c85ab02="" class="red-color">未最终确认的志愿为无效志愿，不能参与投档和录取。</span>
+                    </p>
+                    <p data-v-1c85ab02="">
+                      3、
+                      <span data-v-1c85ab02="" class="red-color"
+                        >志愿最终确认后，考生不可再填报或修改任何批次志愿。</span
+                      >
+                    </p>
+                    <div data-v-1c85ab02="" class="tip-title">※艺体类考生请注意：</div>
+                    <p data-v-1c85ab02="">
+                      提前批本科独立设置艺体类及教师专项艺体类志愿同提前批本科空军招飞、军检院校、非军检院校、教师专项和卫生专项的普通类志愿不能兼报；<span
+                        data-v-1c85ab02=""
+                        class="red-color"
+                        >如果填报了提前批本科空军招飞、军检院校、非军检院校、教师专项和卫生专项的普通类志愿将不能再填报提前批本科独立设置艺体类及教师专项的艺体类志愿。</span
+                      >
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!----><!---->
+      </div>
+    </div>
+    <div id="footer" class="footer">
+      <div class="footerCon clearfix">
+        <span id="_span_jiucuo"
+          ><img
+            onclick="Link('4400000081')"
+            style="margin: 0; border: 0; cursor: pointer"
+            src="3_%E5%BF%97%E6%84%BF%E5%A1%AB%E6%8A%A5_files/ksy_jiucuo.png"
+          /> </span
+        ><span id="_ideConac"
+          ><a href="https://bszs.conac.cn/sitename?method=show&amp;id=0922834C0DCF1D41E053012819AC4180"
+            ><img src="3_%E5%BF%97%E6%84%BF%E5%A1%AB%E6%8A%A5_files/blue.png" /></a
+        ></span>
+        <div class="right">
+          <ul style="margin-top: 10px">
+            <li><a href="https://www.gdzwfw.gov.cn/" target="_blank">政务服务</a> |</li>
+            <li><a href="https://eea.gd.gov.cn/sitemap/content/post_2533113.html" target="_blank">网站导航</a></li>
+          </ul>
+          <p>主办单位：广东省教育考试院</p>
+          <p>版权所有：广东省教育考试院</p>
+          <p>
+            <a href="https://beian.miit.gov.cn/">粤ICP备05008847号</a>&nbsp;&nbsp;&nbsp;&nbsp;<a
+              href="https://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44010602003663"
+              ><img src="3_%E5%BF%97%E6%84%BF%E5%A1%AB%E6%8A%A5_files/ksy_ga.png" /> 粤公网安备44010602003663号</a
+            >&nbsp;&nbsp;&nbsp;&nbsp;网站标识码：4400000081
+          </p>
+          <p>联系电话：020-62833628</p>
+        </div>
+      </div>
+    </div>
+    <!---->
+    <script>
+      window._CONFIG = {};
+      // window._CONFIG['domianURL'] = 'http://localhost:8080/xxzs_ddk'
+      var localObj = window.location;
+      var contextPath = localObj.pathname.split("/")[1];
+      var domainUrl = contextPath;
+      if (domainUrl !== "") {
+        domainUrl = "/" + domainUrl;
+        window._CONFIG["uploadURL"] = domainUrl + "/upload.jsmeb";
+        window._CONFIG["downloadUrl"] = domainUrl + "/download.do";
+        window._CONFIG["pubDownloadUrl"] = domainUrl + "/public/download.do";
+      } else {
+        window._CONFIG["uploadURL"] = domainUrl + "/api/upload.jsmeb";
+        window._CONFIG["downloadUrl"] = domainUrl + "/api/download.do";
+        window._CONFIG["pubDownloadUrl"] = domainUrl + "/api/public/download.do";
+      }
+      window._CONFIG["domainUrl"] = domainUrl;
+      window._CONFIG["regUrl"] = domainUrl + "/reg";
+      // window._CONFIG['rcodeUrl'] = '/ks/login/login.addcode'
+      window._CONFIG["sysTitle"] = "广东省普通高考/学考报名";
+      window._CONFIG["sysTitleGk"] = "广东省普通高考报名";
+      window._CONFIG["sysTitleXk"] = "广东省学业水平考试报名";
+      window._CONFIG["sysTitleGz"] = "广东省高职自主招生报名";
+
+      // 跳转纠错连接
+      function Link(site_code) {
+        var url = "";
+        if (parent !== window) {
+          try {
+            url = window.top.location.href;
+          } catch (e) {
+            url = window.top.document.referrer;
+          }
+        }
+        if (url.length == 0) url = document.location.href;
+        //跳转至纠错系统填写页面
+        window.open(
+          "https://zfwzgl.www.gov.cn/exposure/jiucuo.html?site_code=" + site_code + "&url=" + encodeURIComponent(url)
+        );
+      }
+    </script>
+    <div class="ant-message"><span></span></div>
+    <style></style>
+    <script>
+      window.addEventListener("hashchange", function () {
+        const hash = window.location.hash;
+
+        if (hash == "#/xgk/ggxx") {
+          window.location.href = "./2_公告.html";
+        } else if (hash == "#/xgk/kszy/kszyInfo?index=11") {
+          window.location.href = "./2_志愿填报.html";
+        } else if (hash == "#/xgk/kszy/kszyInfo?index=12") {
+          window.location.href = "./2_征集填报.html";
+        }
+      });
+      document.getElementById("checkButton").addEventListener("click", () => {
+        window.location.href = "./4_查看志愿.html";
+      });
+      document.getElementById("previewButton").addEventListener("click", () => {
+        window.location.href = "./4_查看志愿.html";
+      });
+    </script>
+  </body>
+</html>
