@@ -521,6 +521,12 @@
       document.getElementById("comfirmButton").addEventListener("click", () => {
         window.location.href = "./2_公告.html";
       });
+      document.querySelectorAll(".quit").forEach((ele) => {
+        ele.addEventListener("click", function (e) {
+          e.preventDefault();
+          window.location.href = "https://pg.eeagd.edu.cn/ks/h5/index.html#/xgk/login";
+        });
+      });
     </script>
     <style>
       [ant-click-animating-without-extra-node="true"]::after,

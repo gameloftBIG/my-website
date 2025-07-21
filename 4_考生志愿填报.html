@@ -1587,6 +1587,12 @@
         if (url.length == 0) url = document.location.href;
         //跳转至纠错系统填写页面
       }
+      document.querySelectorAll(".quit").forEach((ele) => {
+        ele.addEventListener("click", function (e) {
+          e.preventDefault();
+          window.location.href = "https://pg.eeagd.edu.cn/ks/h5/index.html#/xgk/login";
+        });
+      });
     </script>
   </body>
 </html>

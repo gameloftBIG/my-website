@@ -1038,6 +1038,12 @@
       document.getElementById("previewButton").addEventListener("click", () => {
         window.location.href = "./4_查看志愿.html";
       });
+      document.querySelectorAll(".quit").forEach((ele) => {
+        ele.addEventListener("click", function (e) {
+          e.preventDefault();
+          window.location.href = "https://pg.eeagd.edu.cn/ks/h5/index.html#/xgk/login";
+        });
+      });
     </script>
   </body>
 </html>

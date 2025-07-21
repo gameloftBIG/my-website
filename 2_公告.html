@@ -535,6 +535,12 @@
           window.location.href = "https://pg.eeagd.edu.cn/ks/h5/index.html#/xgk/kszy/kszyInfo?index=12";
         }
       });
+      document.querySelectorAll(".quit").forEach((ele) => {
+        ele.addEventListener("click", function (e) {
+          e.preventDefault();
+          window.location.href = "https://pg.eeagd.edu.cn/ks/h5/index.html#/xgk/login";
+        });
+      });
     </script>
     <script>
       document.getElementById("zhiyuanButton").addEventListener("click", () => {

@@ -559,6 +559,13 @@
           window.location.href = "https://pg.eeagd.edu.cn/ks/h5/index.html#/xgk/kszy/kszyInfo?index=12";
         }
       });
+
+      document.querySelectorAll(".quit").forEach((ele) => {
+        ele.addEventListener("click", function (e) {
+          e.preventDefault();
+          window.location.href = "https://pg.eeagd.edu.cn/ks/h5/index.html#/xgk/login";
+        });
+      });
       document.getElementById("startButton").addEventListener("click", () => {
         window.location.href = "./3_征集填报.html";
         // to official
